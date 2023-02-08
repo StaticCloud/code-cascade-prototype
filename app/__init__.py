@@ -1,5 +1,9 @@
+from os import getenv
 from flask import Flask
 from app.db import init_db;
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def create_app(test_config=None):
     # create a new Flask object
@@ -9,7 +13,7 @@ def create_app(test_config=None):
     app.url_map.strict_slashes = False
     # specify a key to use for creating server-side sessions
     app.config.from_mapping(
-        SECRET_KEY='super_secret_key'
+        SECRET_KEY=getenv('SECRET_KEY')
     )
 
     init_db(app)
