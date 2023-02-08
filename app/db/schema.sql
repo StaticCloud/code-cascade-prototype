@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS code_cascade;
+CREATE DATABASE code_cascade;
