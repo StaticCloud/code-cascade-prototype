@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, request, jsonify, session, render_template
-from app.models import Comment, Reply
+from app.models import Comment
 from app.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -16,6 +16,7 @@ def getAllReplies(parent_reply):
 
             replies.append({
                 "id": reply.id,
+                "author": reply.author.username,
                 "comment_text": reply.comment_text,
                 "replies": nested_replies
             })
@@ -25,23 +26,25 @@ def getAllReplies(parent_reply):
 
 
 
-@bp.route('/comments', methods=['GET'])
-def comments():
+@bp.route('/comments/<id>', methods=['GET'])
+def comments(id):
     db = get_db()
 
     # query comments
-    comments = db.query(Comment).order_by(Comment.created_at.desc()).all()
+    comments = db.query(Comment).filter(Comment.article_id == id).order_by(Comment.created_at.desc()).all()
     
     return {
         # return data formatted as JSON object
-        'data': [
+        'comments': [
             {
                 # return comment text and replies for top-level comments
                 'comment_text': comment.comment_text,
+                'author': comment.author.username,
                 'replies': [
                     {
                         # return the id, comment text, and nested replies for each reply
                         "id": reply.id,
+                        "author": reply.author.username,
                         "comment_text": reply.comment_text,
                         "replies": getAllReplies(reply) # recursive function to iterate through nested replies
                     }
