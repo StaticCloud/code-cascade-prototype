@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, request, jsonify, session, render_template
-from app.models import Comment
+from app.models import Comment, Article
 from app.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -26,7 +26,7 @@ def getAllReplies(parent_reply):
 
 
 
-@bp.route('/comments/<id>', methods=['GET'])
+@bp.route('/comment/<id>', methods=['GET'])
 def comments(id):
     db = get_db()
 
@@ -52,5 +52,32 @@ def comments(id):
                 ]
             }
             for comment in comments # iterate through all top level comments
+        ]
+    }
+
+@bp.route('/article/<id>', methods=['GET'])
+def articles(id):
+    db = get_db()
+
+    articles = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).all()
+
+    return {
+        'articles': [
+            {
+                'author': article.author.username,
+                'likes': [
+                    {
+                        'username': like.user.username,
+                    }
+                    for like in article.likes
+                ],
+                'replies': [
+                    {
+                        'comment': reply.comment_text
+                    }
+                    for reply in article.replies
+                ]
+            }
+            for article in articles
         ]
     }
