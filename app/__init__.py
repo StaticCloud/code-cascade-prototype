@@ -3,6 +3,8 @@ from flask import Flask
 from app.db import init_db;
 from dotenv import load_dotenv
 
+from app.routes import api;
+
 load_dotenv()
 
 def create_app(test_config=None):
@@ -15,6 +17,8 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY=getenv('SECRET_KEY')
     )
+
+    app.register_blueprint(api)
 
     init_db(app)
 
