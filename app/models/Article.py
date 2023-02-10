@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship
 class Article(Base):
     __tablename__ = 'articles'
     id = Column(Integer, primary_key=True)
+    title = Column(String(255), nullable=False)
+    category = Column(String(255), nullable=False)
     author_id = Column(Integer, ForeignKey('users.id'))
     image_preview = Column(String(255), nullable=False)
     article_path = Column(String(255), nullable=False)

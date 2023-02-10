@@ -59,25 +59,22 @@ def comments(id):
 def articles(id):
     db = get_db()
 
-    articles = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).all()
+    article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
 
     return {
-        'articles': [
-            {
-                'author': article.author.username,
-                'likes': [
-                    {
-                        'username': like.user.username,
-                    }
-                    for like in article.likes
-                ],
-                'replies': [
-                    {
-                        'comment': reply.comment_text
-                    }
-                    for reply in article.replies
-                ]
-            }
-            for article in articles
-        ]
-    }
+            'author': article.author.username,
+            'title': article.title,
+            'category': article.category,
+            'likes': [
+                {
+                    'username': like.user.username,
+                }
+                for like in article.likes
+            ],
+            'replies': [
+                {
+                    'comment': reply.comment_text
+                }
+                for reply in article.replies
+            ]
+        }
