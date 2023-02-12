@@ -1,6 +1,7 @@
 import sys
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from app.models import Comment, Article, User
+from app.utils.auth import login_required
 from app.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -102,6 +103,15 @@ def signup():
         # rollback the lastest commit to prevent the database connection remaining in a pending state
         db.rollback()
         return jsonify(message = 'Signup failed'), 500
+
+    # clear the current session object
+    # set the user_id and the loggedIn property of the session object to user.id and True
+    # reminder that the session object from Flask and SQLAlchemy do different things
+        # The SQLAlchemy version allows us to connect to the database so we can perform CRUD operations
+        # The Flask version is an object that persists across requests and contains client-side data specific for the current user
+    session.clear()
+    session['user_id'] = user.id
+    session['loggedIn'] = True
 
     # return the user input in JSON if the request was successful
     return {
