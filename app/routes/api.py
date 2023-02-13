@@ -161,4 +161,4 @@ def login():
 @bp.route('/logout', methods=['POST'])
 def logout():
     session.clear()
-    return '', 204
+    return jsonify(message = 'Logout successful!'), 200
