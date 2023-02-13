@@ -111,6 +111,7 @@ def signup():
         # The Flask version is an object that persists across requests and contains client-side data specific for the current user
     session.clear()
     session['user_id'] = user.id
+    session['isAdmin'] = user.isAdmin
     session['loggedIn'] = True
 
     # return the user input in JSON if the request was successful

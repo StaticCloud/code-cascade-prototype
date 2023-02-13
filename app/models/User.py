@@ -1,5 +1,5 @@
 from app.db import Base
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import validates
 import bcrypt
 
@@ -9,6 +9,7 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     username = Column(String(50), nullable=False)
+    isAdmin = Column(Boolean, default=False, nullable=False)
     email = Column(String(50), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
 
