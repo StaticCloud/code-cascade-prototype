@@ -120,3 +120,45 @@ def signup():
             'email': user.email,
             'password': user.password
     }
+
+@bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    db = get_db()
+
+    # if the user is already logged in, return a JSON message instead
+    if session.get('loggedIn') == True:
+        return jsonify(message = 'User is already authenticated.'), 400
+
+    try:
+        # find a user with an email provided by the client
+        user = db.query(User).filter(
+            User.email == data['email']
+        ).one()
+
+        # verify the password for the user
+        if user.verify_password(data.get('password')) == False:
+            # if it's invalid, return a 400 error
+            return jsonify(message = 'Incorrect credentials'), 400
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Incorrect credentials'), 400
+    
+    session.clear()
+    session['user_id'] = user.id
+    session['isAdmin'] = user.isAdmin
+    session['loggedIn'] = True
+
+    # return the user input in JSON if the request was successful
+    return {
+            'username': user.username,
+            'email': user.email,
+            'password': user.password
+    }
+
+@bp.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return '', 204
