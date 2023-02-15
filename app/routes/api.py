@@ -74,6 +74,27 @@ def articles(id):
             ]
         }
 
+@bp.route('/article', methods=['POST'])
+def addArticle():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        article = Article(
+            title = data.get('title'),
+            category = data.get('category'),
+            image_preview = data.get('image_preview'),
+            article_path = data.get('article_path'),
+        )
+
+        db.add(article)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        # rollback the lastest commit to prevent the database connection remaining in a pending state
+        db.rollback()
+        return jsonify(message = 'Create article failed'), 500
 
 @bp.route('/signup', methods=['POST'])
 def signup():
