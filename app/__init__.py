@@ -3,7 +3,7 @@ from flask import Flask
 from app.db import init_db;
 from dotenv import load_dotenv
 
-from app.routes import api;
+from app.routes import api, home;
 
 load_dotenv()
 
@@ -19,6 +19,7 @@ def create_app(test_config=None):
     )
 
     app.register_blueprint(api)
+    app.register_blueprint(home)
 
     init_db(app)
 
