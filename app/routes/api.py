@@ -1,5 +1,5 @@
 import sys
-from flask import Blueprint, request, jsonify, session
+from flask import Blueprint, request, jsonify, session, render_template
 from app.models import Comment, Article, User
 from app.utils.auth import login_required
 from app.db import get_db
@@ -74,6 +74,32 @@ def articles(id):
             ]
         }
 
+@bp.route('/article', methods=['POST'])
+def addArticle():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        article = Article(
+            title = data.get('title'),
+            category = data.get('category'),
+            image_preview = data.get('image_preview'),
+            article_path = data.get('article_path'),
+        )
+
+        db.add(article)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Create article failed'), 500
+    
+    return {
+            'id': article.id,
+            'title': article.title,
+            'category': article.category
+    }
 
 @bp.route('/signup', methods=['POST'])
 def signup():
@@ -162,3 +188,9 @@ def login():
 def logout():
     session.clear()
     return jsonify(message = 'Logout successful!'), 200
+
+@bp.route('/article_render/<id>')
+def article_render(id):
+    db = get_db()
+    article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
+    return render_template(article.article_path)
