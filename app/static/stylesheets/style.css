@@ -18,12 +18,14 @@
 
 /* HEADER */
 #nav-wrapper {
-    z-index: 10000;
-    height: 60px;
+    width: 100%;
+    height: 80px;
     display: flex;
+    padding: 20px;
     align-items: center;
     justify-content: space-between;
 
+    z-index: 10000;
     position: fixed;
     top: 0;
 }
@@ -32,17 +34,41 @@
     display: flex;
 }
 
+#nav-wrapper nav p {
+    margin: 0 10px;
+}
+
 /* LANDING SECTION */
 #landing-wrapper {
     height: 100vh;
-
-    filter: grayscale(100%);
-    background-image: linear-gradient(0deg, var(--primary-transparent), var(--primary-transparent)), 
+    background-image: linear-gradient(0deg, var(--primary), var(--primary-transparent)), 
                       url('../img/landing-banner.jpg');
     background-size: cover;
     background-position: center;
 }
 
-/* #landing {
+#landing {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-} */
+#landing img {
+    width: 900px;
+    animation-name: logo-fade-in;
+    animation-duration: 1s;
+    transition-timing-function: ease-out;
+}
+
+@keyframes logo-fade-in {
+    from {
+        opacity: 0;
+        padding-bottom: 80px;
+    }
+
+    to {
+        opacity: 1;
+        padding-bottom: 0px;
+    }
+}
