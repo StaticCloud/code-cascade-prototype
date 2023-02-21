@@ -6,6 +6,10 @@
     --primary-transparent: rgba(25, 25, 25, 0.63);
 }
 
+body {
+    background-color: var(--primary)
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,6 +18,16 @@
     text-rendering: optimizeLegibility;
     font-family: 'Outfit', sans-serif;
     color: white
+}
+
+h1 {
+    font-size: 4rem;
+    margin: 40px 0;
+}
+
+p {
+    font-size: 1.3rem;
+    line-height: 2.2rem;
 }
 
 /* HEADER */
@@ -59,6 +73,13 @@
     animation-name: logo-fade-in;
     animation-duration: 1s;
     transition-timing-function: ease-out;
+}
+
+/* ABOUT */
+#about-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    padding: 80px 0;
 }
 
 @keyframes logo-fade-in {
