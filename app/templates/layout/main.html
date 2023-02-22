@@ -9,7 +9,18 @@
     </head>
 
     <body>
-        {% block body %}{% endblock %}
+        <header id="nav-wrapper">
+            <img src="/img/code-cascade-logo-singular-transparent.png" alt="cc-logo" width="80px;">
+            <nav>
+                <p>HOME</p>
+                <p>SEARCH</p>
+                <p>LOGIN</p>
+            </nav>
+        </header>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+        <script src="/javascript/nav.js"></script>
     </body>
 
 </html>
