@@ -8,6 +8,16 @@
     </div>
 </section>
 <section class="content-wrapper">
+    <div id="articles">
+        <h1>RECENT ARTICLES</h1>
+        <div id="home-article-wrapper">
+            {% for article in articles %}
+                {% include "partials/article-preview.html" %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="content-wrapper">
     <div id="about">
         <h1>ABOUT</h1>
         <p>
@@ -16,14 +26,6 @@
             on various different web development technologies or topics. Whether you're new to web development,
             or if you're an experienced developer looking to grow their skills, Code Cascade has something for everyone.
         </p>
-    </div>
-</section>
-<section class="content-wrapper">
-    <div id="articles">
-        <h1>RECENT ARTICLES</h1>
-        {% for article in articles %}
-            {% include "partials/article-preview.html" %}
-        {% endfor %}
     </div>
 </section>
 
