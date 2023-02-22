@@ -8,6 +8,7 @@ class Article(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(255), nullable=False)
     category = Column(String(255), nullable=False)
+    description = Column(String(255), nullable=False)
     image_preview = Column(String(255), nullable=False)
     article_path = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now)

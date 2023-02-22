@@ -1,4 +1,30 @@
 {% extends "layout/main.html" %}
+
 {% block body %}
-<h1>Home page</h1>
+
+<section id="landing-wrapper">
+    <div id="landing">
+        <img src="/img/code-cascade-logo-transparent.png" alt="logo-landing">
+    </div>
+</section>
+<section class="content-wrapper">
+    <div id="about">
+        <h1>ABOUT</h1>
+        <p>
+            Code Cascade is a web development blog, based in Oregon, for developers of all skill levels. 
+            Code Cascade aims to provide easily digestible, beginner friendly, and insightful information 
+            on various different web development technologies or topics. Whether you're new to web development,
+            or if you're an experienced developer looking to grow their skills, Code Cascade has something for everyone.
+        </p>
+    </div>
+</section>
+<section class="content-wrapper">
+    <div id="articles">
+        <h1>RECENT ARTICLES</h1>
+        {% for article in articles %}
+            {% include "partials/article-preview.html" %}
+        {% endfor %}
+    </div>
+</section>
+
 {% endblock %}
