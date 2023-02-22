@@ -25,6 +25,18 @@ h1 {
     margin: 40px 0;
 }
 
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.1rem
+}
+
+h4 {
+    font-size: 0.9rem
+}
+
 p {
     font-size: 1.3rem;
     line-height: 2.2rem;
@@ -82,7 +94,7 @@ p {
 }
 
 /* ABOUT */
-#about-wrapper {
+.content-wrapper {
     width: 900px;
     margin: 0 auto;
     padding: 180px 0;
@@ -98,4 +110,29 @@ p {
         opacity: 1;
         padding-bottom: 0px;
     }
+}
+
+/* ARTICLE PREVIEW */
+.article-preview {
+    display: flex;
+    align-items: center;
+}
+
+.article-preview-image {
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.article-preview-content-wrapper {
+    margin: 0 18px;
+}
+
+.category {
+    padding: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    background-color: rgb(50, 169, 216);
 }
