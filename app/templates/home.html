@@ -8,22 +8,36 @@
     </div>
 </section>
 <section class="content-wrapper">
+    <div id="articles">
+        <h1>RECENT ARTICLES</h1>
+        <div id="home-article-wrapper">
+            {% for article in articles %}
+                {% include "partials/article-preview.html" %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id="about-wrapper">
     <div id="about">
         <h1>ABOUT</h1>
         <p>
-            Code Cascade is a web development blog, based in Oregon, for developers of all skill levels. 
-            Code Cascade aims to provide easily digestible, beginner friendly, and insightful information 
-            on various different web development technologies or topics. Whether you're new to web development,
+            Code Cascade is a web development blog aimed at developers of all skill levels. Code Cascade aims to provide easily digestible, beginner friendly, 
+            and insightful information on various different web development technologies or topics. Whether you're new to web development,
             or if you're an experienced developer looking to grow their skills, Code Cascade has something for everyone.
         </p>
-    </div>
-</section>
-<section class="content-wrapper">
-    <div id="articles">
-        <h1>RECENT ARTICLES</h1>
-        {% for article in articles %}
-            {% include "partials/article-preview.html" %}
-        {% endfor %}
+        <br>
+        <p>
+            Code Cascade is developed and maintained by Diego Marrs, a web developer located in the Portland, Oregon Metropolitan Area. Feel free to visit my LinkedIn or GitHub page.
+        </p>
+        <br>
+        <div id="about-links">
+            <a href="https://github.com/StaticCloud" target="_blank">
+                <img src="/svg/github.svg" alt="github">
+            </a>
+            <a href="https://www.linkedin.com/in/diego-marrs/" target="_blank">
+                <img src="/svg/linkedin.svg" alt="linkedin">
+            </a>
+        </div>
     </div>
 </section>
 
