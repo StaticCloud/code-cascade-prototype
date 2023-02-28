@@ -15,8 +15,8 @@ def index():
 
 @bp.route('/login')
 def login():
-    return
+    return render_template('login.html')
 
 @bp.route('/signup')
 def signup():
-    return
+    return render_template('signup.html')
