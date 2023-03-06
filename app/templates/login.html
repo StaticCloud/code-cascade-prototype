@@ -1,3 +1,23 @@
-<section class="auth-wrapper">
+{% extends "layout/main.html" %}
 
+{% block body %}
+
+<section class="auth-wrapper">
+    <form class="auth-form">
+        <div class="form-wrap">
+            <h2>Login</h2>
+
+            <label for="username">Username</label>
+            <input type="text" name="username">
+
+            <label for="password">Password</label>
+            <input type="text" name="password">
+
+            <button type="submit">Login</button>
+        </div>
+
+        <a href="/signup">Don't have an account?</a>
+    </form>
 </section>
+
+{% endblock %}
