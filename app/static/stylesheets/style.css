@@ -205,6 +205,10 @@ p {
     border-radius: 5px;
 }
 
+.form-wrap {
+    width: 300px;
+}
+
 .auth-form h2 {
     padding-bottom: 20px;
 }
@@ -223,7 +227,6 @@ p {
 
     text-align: center;
     background-color: var(--secondary);
-    width: 100%;
     padding: 10px 0;
 }
 
@@ -235,4 +238,5 @@ p {
 .auth-form input,
 .auth-form button {
     margin: 15px 0;
+    width: 100%;
 }
