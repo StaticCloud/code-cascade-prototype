@@ -14,7 +14,11 @@
             <nav>
                 <a href="/"><p>HOME</p></a>
                 <a href="/search"><p>SEARCH</p></a>
+                {% if loggedIn == False %}
                 <a href="/login"><p>LOGIN</p></a>
+                {% else %}
+                <a href="/logout"><p>LOGOUT</p></a>
+                {% endif %}
             </nav>
         </header>
         <main>
