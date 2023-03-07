@@ -78,6 +78,17 @@ p {
 
 #nav-wrapper nav p {
     margin: 0 10px;
+    border: rgba(255, 255, 255, 0) 2px solid;
+    transition: all 0.2s;
+}
+
+#nav-wrapper nav a {
+    text-decoration: none;
+}
+
+#nav-wrapper nav p:hover {
+    cursor: pointer;
+    border-bottom: white 2px solid;
 }
 
 .nav-scroll {
@@ -245,4 +256,8 @@ p {
 
 .auth-bottom-link {
     padding-top: 30px;
+}
+
+.auth-form button[type="submit"]:hover {
+    cursor: pointer;
 }

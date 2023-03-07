@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Code Cascade</title>
         <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="icon" type="image/x-icon" href="/img/cci.png">
     </head>
 
     <body>
@@ -14,16 +15,20 @@
             <nav>
                 <a href="/"><p>HOME</p></a>
                 <a href="/search"><p>SEARCH</p></a>
-                {% if loggedIn == False %}
-                <a href="/login"><p>LOGIN</p></a>
+                {% if loggedIn == True %}
+                <p id="logout">LOGOUT</p>
                 {% else %}
-                <a href="/logout"><p>LOGOUT</p></a>
+                <a href="/login"><p>LOGIN</p></a>
+                <a href="/signup"><p>SIGN UP</p></a>
                 {% endif %}
             </nav>
         </header>
         <main>
             {% block body %}{% endblock %}
         </main>
+        {% if loggedIn %}
+        <script src="/javascript/logout.js"></script>
+        {% endif %}
         <script src="/javascript/nav.js"></script>
     </body>
 
