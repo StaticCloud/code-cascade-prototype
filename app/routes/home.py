@@ -11,4 +11,12 @@ def index():
     db = get_db()
     articles = db.query(Article).order_by(Article.created_at.desc()).all()
     articles = articles[:5]
-    return render_template('home.html', articles=articles)
+    return render_template('home.html', articles=articles, loggedIn=session.get('loggedIn'))
+
+@bp.route('/login')
+def login():
+    return render_template('login.html')
+
+@bp.route('/signup')
+def signup():
+    return render_template('signup.html')
