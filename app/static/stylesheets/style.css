@@ -4,6 +4,8 @@
 :root {
     --clear: rgba(255,255,255,0);
     --primary: #191919;
+    --secondary: #2e2e2e;
+    --ternary: #202020;
     --primary-transparent: rgba(25, 25, 25, 0.63);
 }
 
@@ -76,6 +78,17 @@ p {
 
 #nav-wrapper nav p {
     margin: 0 10px;
+    border: rgba(255, 255, 255, 0) 2px solid;
+    transition: all 0.2s;
+}
+
+#nav-wrapper nav a {
+    text-decoration: none;
+}
+
+#nav-wrapper nav p:hover {
+    cursor: pointer;
+    border-bottom: white 2px solid;
 }
 
 .nav-scroll {
@@ -106,16 +119,20 @@ p {
 }
 
 /* ABOUT */
-#about-wrapper {
+#about-wrapper,
+.auth-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     padding: 50px;
-    background-image: linear-gradient(0deg, var(--primary-transparent), var(--primary)), 
-                      url('../img/img1.jpg');
     background-size: cover;
     background-position: center;
+}
+
+#about-wrapper {
+    background-image: linear-gradient(0deg, var(--primary-transparent), var(--primary)), 
+        url('../img/img1.jpg');
 }
 
 #about-links {
@@ -182,4 +199,65 @@ p {
 #home-article-wrapper {
     display: flex;
     flex-wrap: wrap;
+}
+
+/* AUTH STYLING */
+.auth-wrapper {
+    background-image: linear-gradient(0deg, var(--primary-transparent), var(--primary-transparent)), 
+                      url('../img/img5.jpg');
+    background-position: bottom;
+}
+
+.auth-form {
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 70px;
+    border-radius: 10px;
+}
+
+.form-wrap {
+    width: 300px;
+}
+
+.auth-form h2 {
+    padding-bottom: 20px;
+}
+
+.auth-form input {
+    padding: 10px;
+    font-size: 0.9rem;
+    border: none;
+}
+
+.auth-form input:focus {
+    outline: none;
+}
+
+.auth-form button {
+    all: unset;
+
+    text-align: center;
+    background-color: var(--secondary);
+    padding: 10px 0;
+}
+
+.auth-form input {
+    color:rgb(0,0,0);
+    display: block;
+}
+
+.auth-form input,
+.auth-form button {
+    margin: 15px 0;
+    width: 100%;
+}
+
+.auth-bottom-link {
+    padding-top: 30px;
+}
+
+.auth-form button[type="submit"]:hover {
+    cursor: pointer;
 }

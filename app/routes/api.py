@@ -105,6 +105,7 @@ def addArticle():
 def signup():
     # get the JSON data from the request
     data = request.get_json()
+    print(data)
     db = get_db()
 
     # create a new user using the credentials provided by the client
