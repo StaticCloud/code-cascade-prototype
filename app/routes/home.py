@@ -13,6 +13,10 @@ def index():
     articles = articles[:5]
     return render_template('home.html', articles=articles, loggedIn=session.get('loggedIn'))
 
+@bp.route('/search')
+def search():
+    return render_template('search.html')
+
 @bp.route('/login')
 def login():
     return render_template('login.html')
