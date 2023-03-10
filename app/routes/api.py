@@ -1,5 +1,6 @@
 import sys
 from flask import Blueprint, request, jsonify, session, render_template
+from sqlalchemy import and_, extract
 from app.models import Comment, Article, User
 from app.utils.auth import login_required
 from app.db import get_db
@@ -198,12 +199,24 @@ def search():
     db = get_db()
     args = request.args.to_dict();
 
-    articles = db.query(Article).all()
+    filters = []
+
+    if args.get('year'):
+        filters.append(extract('year', Article.created_at) == args.get('year'))
+
+    if args.get('category'):
+        filters.append(Article.category == args.get('category'))
 
     if args.get('keywords'):
         args['keywords'] = args.get('keywords').split('+')
 
+        for keyword in args.get('keywords'):
+            filters.append(Article.title.contains(keyword))
+
+    articles = db.query(Article).filter(and_(*filters)).all()
+
     return [{
-        'year': article.created_at,
-        'category': article.category
+        'category': article.category,
+        'created_at': article.created_at,
+        'title': article.title,
     } for article in articles];
