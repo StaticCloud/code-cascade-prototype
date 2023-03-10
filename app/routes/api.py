@@ -22,9 +22,6 @@ def getAllReplies(parent_reply):
 
     return replies
 
-
-
-
 @bp.route('/comment/<id>', methods=['GET'])
 def comments(id):
     db = get_db()
@@ -190,8 +187,23 @@ def logout():
     session.clear()
     return jsonify(message = 'Logout successful!'), 200
 
-@bp.route('/article_render/<id>')
-def article_render(id):
+# @bp.route('/article_render/<id>')
+# def article_render(id):
+#     db = get_db()
+#     article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
+#     return render_template(article.article_path)
+
+@bp.route('/search', methods=['GET'])
+def search():
     db = get_db()
-    article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
-    return render_template(article.article_path)
+    args = request.args.to_dict();
+
+    articles = db.query(Article).all()
+
+    if args.get('keywords'):
+        args['keywords'] = args.get('keywords').split('+')
+
+    return [{
+        'year': article.created_at,
+        'category': article.category
+    } for article in articles];
