@@ -193,7 +193,22 @@ p {
     padding: 8px;
     margin-bottom: 5px;
     display: inline-block;
+}
+
+.category[data-category="REACT"] {
     background-color: rgb(50, 169, 216);
+}
+
+.category[data-category="HTML"] {
+    background-color: rgb(226, 110, 33);
+}
+
+.category[data-category="CSS"] {
+    background-color: rgb(216, 50, 127);
+}
+
+.category[data-category="NODE"] {
+    background-color: rgb(43, 167, 80);
 }
 
 #home-article-wrapper {
