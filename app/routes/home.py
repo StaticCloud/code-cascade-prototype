@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect
+from flask import Blueprint, render_template, session, redirect, request
 from app.models import Article
 from app.db import get_db
 
@@ -15,7 +15,13 @@ def index():
 
 @bp.route('/search')
 def search():
-    return render_template('search.html')
+    args = request.args.to_dict();
+
+    if not args:
+        return render_template('search.html')
+    
+    return render_template('search-results.html')
+    
 
 @bp.route('/login')
 def login():
