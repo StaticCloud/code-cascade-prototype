@@ -1,0 +1,1 @@
+const searchResultTest = document.querySelector('#search-result-text');
