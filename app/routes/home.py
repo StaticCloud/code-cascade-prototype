@@ -38,7 +38,7 @@ def search():
 
     articles = db.query(Article).filter(and_(*filters)).all()
     
-    return render_template('search-results.html',keywords=args.get('keywords'))
+    return render_template('search-results.html',keywords=args.get('keywords'), articles=articles)
     
 
 @bp.route('/login')

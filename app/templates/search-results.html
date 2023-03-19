@@ -4,6 +4,9 @@
 
 <section>
     <p id="search-result-text">Search results for <i>{{keywords|format_keywords}}</i></p>
+    {% for article in articles %}
+        {% include "partials/article-preview.html" %}
+    {% endfor %}
 </section>
 
 <script src="/javascript/search.js"></script>
