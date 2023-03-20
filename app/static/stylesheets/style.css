@@ -361,17 +361,17 @@ p {
     margin: 1rem 0;
 }
 
-a[href="/search"] {
+main a[href="/search"] {
     display: inline-flex;
     text-decoration: none;
     transition: all 0.2s;
     border-bottom: var(--primary) 2px solid;
 }
 
-a[href="/search"]:hover {
+main a[href="/search"]:hover {
     border-bottom: white 2px solid;
 }
 
-a[href="/search"] h2 {
+main a[href="/search"] h2 {
     width: fit-content;
 }
