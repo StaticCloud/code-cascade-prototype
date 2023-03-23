@@ -2,6 +2,7 @@ from os import getenv
 from flask import Flask
 from app.db import init_db;
 from dotenv import load_dotenv
+from app.utils import filters
 
 from app.routes import api, home;
 
@@ -20,6 +21,8 @@ def create_app(test_config=None):
 
     app.register_blueprint(api)
     app.register_blueprint(home)
+
+    app.jinja_env.filters['format_keywords'] = filters.format_keywords
 
     init_db(app)
 

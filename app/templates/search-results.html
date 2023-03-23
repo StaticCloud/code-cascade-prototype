@@ -1,0 +1,25 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
+<section class="search-results-section">
+    <a href="/search"><h2>Go Back</h2></a>
+    {% if keywords %}
+        <h1 id="search-result-text">Search results for <i>{{keywords|format_keywords}}</i></h1>
+    {% else %}
+        <h1 id="search-result-text"></h1>
+    {% endif %}
+    {% if articles %}
+        <div class="search-result-wrap">
+            {% for article in articles %}
+                {% include "partials/article-preview.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>No results that match your query.</h1>
+    {% endif %}
+</section>
+
+<script src="/javascript/search.js"></script>
+
+{% endblock %}
