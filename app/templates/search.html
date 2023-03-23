@@ -1,0 +1,26 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
+<section class="search-wrapper">
+    <div class="search-content">
+        <h1>Search</h1>
+        <form>
+            <input name="keywords" type="text" placeholder="Search">
+            <select name="category" id="category">
+                <option value="">Category</option>
+                <option value="REACT">React</option>
+                <option value="HTML">HTML</option>
+            </select>
+            <select name="year" id="year">
+                <option value="">Year</option>
+                <option value="2023">2023</option>
+            </select>
+            <button type="submit">
+                <img src="./svg/magnifying-glass-solid.svg" alt="">
+            </button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,5 +1,6 @@
 import sys
 from flask import Blueprint, request, jsonify, session, render_template
+from sqlalchemy import and_, extract
 from app.models import Comment, Article, User
 from app.utils.auth import login_required
 from app.db import get_db
@@ -21,9 +22,6 @@ def getAllReplies(parent_reply):
             })
 
     return replies
-
-
-
 
 @bp.route('/comment/<id>', methods=['GET'])
 def comments(id):
@@ -190,8 +188,35 @@ def logout():
     session.clear()
     return jsonify(message = 'Logout successful!'), 200
 
-@bp.route('/article_render/<id>')
-def article_render(id):
+# @bp.route('/article_render/<id>')
+# def article_render(id):
+#     db = get_db()
+#     article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
+#     return render_template(article.article_path)
+
+@bp.route('/search', methods=['GET'])
+def search():
     db = get_db()
-    article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
-    return render_template(article.article_path)
+    args = request.args.to_dict();
+
+    filters = []
+
+    if args.get('year'):
+        filters.append(extract('year', Article.created_at) == args.get('year'))
+
+    if args.get('category'):
+        filters.append(Article.category == args.get('category'))
+
+    if args.get('keywords'):
+        args['keywords'] = args.get('keywords').split('+')
+
+        for keyword in args.get('keywords'):
+            filters.append(Article.title.contains(keyword))
+
+    articles = db.query(Article).filter(and_(*filters)).all()
+
+    return [{
+        'category': article.category,
+        'created_at': article.created_at,
+        'title': article.title,
+    } for article in articles];
