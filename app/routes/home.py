@@ -40,6 +40,12 @@ def search():
     
     return render_template('search-results.html',keywords=args.get('keywords'), articles=articles)
     
+@bp.route('/article/<id>')
+def article(id):
+    db = get_db()
+    article = db.query(Article).filter(Article.id == id).one();
+
+    return render_template('article.html', article=article)
 
 @bp.route('/login')
 def login():

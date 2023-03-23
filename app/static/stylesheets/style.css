@@ -6,7 +6,12 @@
     --primary: #191919;
     --secondary: #2e2e2e;
     --ternary: #202020;
+    --code: #111111;
     --primary-transparent: rgba(25, 25, 25, 0.63);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -168,6 +173,7 @@ p {
     position: relative;
     height: 400px;
     width: 390px;
+    text-decoration: none;
 }
 
 .home-article-wrapper .article-preview:first-child {
@@ -289,11 +295,11 @@ p {
 }
 
 .search-content {
-    animation-name: search;
+    animation-name: fade-in;
     animation-duration: 0.5s;
 }
 
-@keyframes search {
+@keyframes fade-in {
     from {
         opacity: 0;
         padding-bottom: 30px;
@@ -374,4 +380,86 @@ main a[href="/search"]:hover {
 
 main a[href="/search"] h2 {
     width: fit-content;
+}
+
+/* ARTICLE PAGE */
+.article-banner-wrapper {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.article-banner-text {
+    text-align: center;
+    animation-name: fade-in;
+    animation-duration: 0.5s;
+}
+
+.article-banner-text h1 {
+    margin: 1rem 0; 
+}
+
+.content-button-wrap {
+    display: block;
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+    margin: 0 auto;
+    border: white 3px solid;
+    border-radius: 50%;
+
+    transition: all 0.5s;
+}
+
+.content-button-wrap:hover {
+    background-color: white;
+}
+
+.content-button-wrap:hover img {
+    filter: contrast(0%) brightness(0%);
+}
+
+.content-button-wrap img {
+    transition: all 0.2s;
+    filter: contrast(0%) brightness(1000%);
+}
+
+/* ARTICLE CONTENT */
+.article-content {
+    display: block;
+    margin: 0 auto;
+    padding: 70px 0;
+    width: 1020px;
+}
+
+.article-content p,
+.code-wrap,
+.article-content ul {
+    margin-bottom: 30px;
+}
+
+.article-content ul {
+    padding-left: 20px;
+    font-size: 1.3rem;
+}
+
+.article-content li {
+    margin-bottom: 15px;
+}
+
+code {
+    background-color: var(--code);
+    font-size: 1.2rem;
+    color: orange;
+    padding: 4px;
+    font-family: Consolas,"courier new"
+}
+
+.code-wrap {
+    padding: 20px;
+    background-color: var(--code);
 }
