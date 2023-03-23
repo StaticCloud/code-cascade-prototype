@@ -168,10 +168,9 @@ p {
     position: relative;
     height: 400px;
     width: 390px;
-    margin: 5px;
 }
 
-.article-preview:first-child {
+.home-article-wrapper .article-preview:first-child {
     width: 790px;
 }
 
@@ -193,12 +192,30 @@ p {
     padding: 8px;
     margin-bottom: 5px;
     display: inline-block;
+}
+
+.category[data-category="REACT"] {
     background-color: rgb(50, 169, 216);
 }
 
+.category[data-category="HTML"] {
+    background-color: rgb(226, 110, 33);
+}
+
+.category[data-category="CSS"] {
+    background-color: rgb(216, 50, 127);
+}
+
+.category[data-category="NODE"] {
+    background-color: rgb(43, 167, 80);
+}
+
 #home-article-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
 }
 
 /* AUTH STYLING */
@@ -260,4 +277,101 @@ p {
 
 .auth-form button[type="submit"]:hover {
     cursor: pointer;
+}
+
+/* SEARCH */
+.search-wrapper {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.search-content {
+    animation-name: search;
+    animation-duration: 0.5s;
+}
+
+@keyframes search {
+    from {
+        opacity: 0;
+        padding-bottom: 30px;
+    }
+    to {
+        opacity: 1;
+        padding-bottom: 0px;
+    }
+}
+
+.search-content * {
+    border: none;
+    padding: 15px;
+}
+
+.search-content select {
+    border: none;
+}
+
+.search-content form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.search-content input {
+    color: black;
+    display: block;
+    width: 400px;
+}
+
+.search-content input:focus {
+    outline: none;
+}
+
+.search-content select,
+.search-content button {
+    background-color: var(--secondary)
+}
+
+.search-content img {
+    padding: 0;
+    width: 15px;
+}
+
+/* SEARCH RESULTS */
+.search-result-wrap {
+    display: inline-grid;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.search-results-section {
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 6rem;
+}
+
+.search-results-section h1 {
+    margin: 1rem 0;
+}
+
+.search-results-section a {
+    margin: 1rem 0;
+}
+
+main a[href="/search"] {
+    display: inline-flex;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-bottom: var(--primary) 2px solid;
+}
+
+main a[href="/search"]:hover {
+    border-bottom: white 2px solid;
+}
+
+main a[href="/search"] h2 {
+    width: fit-content;
 }
