@@ -286,7 +286,7 @@ p {
 }
 
 /* SEARCH */
-.search-wrapper {
+.section-content-wrapper {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -462,4 +462,46 @@ code {
 .code-wrap {
     padding: 20px;
     background-color: var(--code);
+}
+
+/* ABOUT */
+.profile-block {
+    text-align: left;
+    display: flex;
+    width: 1200px;
+}
+
+.profile-block ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.profile-user-info {
+    flex: 1;
+}
+
+.profile-content {
+    flex: 2;
+    background-color: var(--secondary);
+}
+
+.profile-nav {
+    display: flex;
+    background-color: var(--ternary);
+}
+
+.profile-nav li {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-nav img {
+    width: 20px;
+    height: 20px;
+}
+
+.profile-body {
+    min-height: 400px;
+    padding: 30px;
 }
