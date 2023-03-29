@@ -468,7 +468,9 @@ code {
 .profile-block {
     text-align: left;
     display: flex;
+    flex-direction: column;
     width: 1200px;
+    background-color: var(--ternary);
 }
 
 .profile-block ul {
@@ -477,11 +479,12 @@ code {
 }
 
 .profile-user-info {
-    flex: 1;
+    padding: 50px;
+    display: flex;
+    align-items: center;
 }
 
 .profile-content {
-    flex: 2;
     background-color: var(--secondary);
 }
 
@@ -494,6 +497,7 @@ code {
     flex: 1;
     padding: 20px;
     text-align: center;
+    border-bottom: white 2px var(--primary);
 }
 
 .profile-nav img {
@@ -502,6 +506,28 @@ code {
 }
 
 .profile-body {
-    min-height: 400px;
+    min-height: 350px;
     padding: 30px;
+}
+
+.profile-user-info > img {
+    border-radius: 50%;
+}
+
+.profile-user-info h1 {
+    margin: 1rem 0;
+}
+
+.profile-user-info li img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.user-info {
+    margin: 0 30px;
+}
+
+#about {
+    border-bottom: white 2px solid;
 }
