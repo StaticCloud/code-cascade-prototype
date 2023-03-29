@@ -471,6 +471,7 @@ code {
     flex-direction: column;
     width: 1200px;
     background-color: var(--ternary);
+    border-radius: 1rem;
 }
 
 .profile-block ul {
@@ -486,6 +487,7 @@ code {
 
 .profile-content {
     background-color: var(--secondary);
+    border-radius: 1rem;
 }
 
 .profile-nav {
