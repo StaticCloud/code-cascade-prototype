@@ -4,7 +4,7 @@ from app.db import init_db;
 from dotenv import load_dotenv
 from app.utils import filters
 
-from app.routes import api, home;
+from app.routes import api, home, profile;
 
 load_dotenv()
 
@@ -21,6 +21,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(api)
     app.register_blueprint(home)
+    app.register_blueprint(profile)
 
     app.jinja_env.filters['format_keywords'] = filters.format_keywords
 
