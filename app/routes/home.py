@@ -20,7 +20,7 @@ def search():
     args = request.args.to_dict();
 
     if not args:
-        return render_template('search.html')
+        return render_template('search.html', loggedIn=session.get('loggedIn'))
     
     filters = []
 
@@ -38,7 +38,7 @@ def search():
 
     articles = db.query(Article).filter(and_(*filters)).all()
     
-    return render_template('search-results.html',keywords=args.get('keywords'), articles=articles)
+    return render_template('search-results.html', keywords=args.get('keywords'), articles=articles, loggedIn=session.get('loggedIn'))
     
 @bp.route('/article/<id>')
 def article(id):
