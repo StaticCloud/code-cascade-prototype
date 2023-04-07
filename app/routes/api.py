@@ -219,4 +219,5 @@ def search():
         'category': article.category,
         'created_at': article.created_at,
         'title': article.title,
+        'like_count': article.like_count,
     } for article in articles];
