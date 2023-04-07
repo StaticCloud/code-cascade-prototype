@@ -220,4 +220,10 @@ def search():
         'created_at': article.created_at,
         'title': article.title,
         'like_count': article.like_count,
+        'likes': [
+                {
+                    'id': like.user.id
+                }
+                for like in article.likes
+            ]
     } for article in articles];
