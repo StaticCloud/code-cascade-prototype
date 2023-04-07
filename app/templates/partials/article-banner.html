@@ -3,6 +3,22 @@
     <div class="article-banner-text">
         <h3 class="category" data-category="{{article.category}}">{{article.category}}</h3>
         <h1>{{article.title}}</h1>
+        {% if loggedIn %}
+            <div class="like-or-save">
+                <span>
+                    <p>{{article.like_count}}</p>
+                    {% if is_liked %}
+                        <img src="/icons/heart-red.svg" alt="like-article">
+                    {% else %}
+                        <img src="/icons/heart-regular.svg" alt="like-article">
+                    {% endif %}
+                </span>
+                <span>
+                    <p>0</p>
+                    <img src="/icons/bookmark-regular.svg" alt="save-article">
+                </span>
+            </div>
+        {% endif %}
         <a href="#article-content" class="content-button-wrap">
             <img src="/icons/chevron-down-solid.svg" alt="go-to-content">
         </a>

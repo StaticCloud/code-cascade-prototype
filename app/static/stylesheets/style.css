@@ -436,6 +436,32 @@ main a[href="/search"] h2 {
     width: 1020px;
 }
 
+.like-or-save {
+    display: inline-flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.63);
+    margin: 15px;
+    margin-top: 0px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.like-or-save img {
+    width: 25px;
+    height: 25px;
+}
+
+.like-or-save span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.like-or-save span p {
+    margin-right: 12px;
+}
+
 .article-content p,
 .code-wrap,
 .article-content ul {
