@@ -463,6 +463,12 @@ main a[href="/search"] h2 {
     margin-right: 12px;
 }
 
+.add-like:hover,
+.remove-like:hover,
+.save-article:hover {
+    cursor: pointer;
+}
+
 .article-content p,
 .code-wrap,
 .article-content ul {
