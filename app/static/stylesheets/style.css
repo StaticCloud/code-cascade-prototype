@@ -405,10 +405,11 @@ main a[href="/search"] h2 {
 
 .content-button-wrap {
     display: block;
-    width: 60px;
-    height: 60px;
-    padding: 15px;
+    width: 50px;
+    height: 50px;
+    padding: 12px;
     margin: 0 auto;
+    margin-top: 10px;
     border: white 3px solid;
     border-radius: 50%;
 
