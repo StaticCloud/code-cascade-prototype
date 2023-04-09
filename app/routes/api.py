@@ -250,3 +250,24 @@ def like():
         return jsonify(message = 'Failed to add like'), 500
 
     return '', 200
+
+@bp.route('/article/removeLike', methods=['DELETE'])
+@login_required
+def removeLike():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        db.delete(db.query(Like).filter(
+            and_(
+                Like.article_id == data.get('article_id'),
+                Like.user_id == session.get('user_id')
+            )).one())
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Failed to remove like'), 404
+
+    return '', 200
