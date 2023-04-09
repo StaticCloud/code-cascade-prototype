@@ -1,7 +1,7 @@
 import sys
 from flask import Blueprint, request, jsonify, session, render_template
 from sqlalchemy import and_, extract
-from app.models import Comment, Article, User
+from app.models import Comment, Article, User, Like
 from app.utils.auth import login_required
 from app.db import get_db
 
@@ -227,3 +227,26 @@ def search():
                 for like in article.likes
             ]
     } for article in articles];
+
+
+@bp.route('/article/like', methods=['POST'])
+@login_required
+def like():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        like = Like(
+            user_id = session.get('user_id'),
+            article_id = data.get('article_id')
+        )
+
+        db.add(like)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Failed to add like'), 500
+
+    return '', 200

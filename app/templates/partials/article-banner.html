@@ -8,9 +8,9 @@
                 <span>
                     <p>{{article.like_count}}</p>
                     {% if is_liked %}
-                        <img src="/icons/heart-red.svg" alt="like-article">
+                        <img src="/icons/heart-red.svg" alt="like-article" class="remove-like">
                     {% else %}
-                        <img src="/icons/heart-regular.svg" alt="like-article">
+                        <img src="/icons/heart-regular.svg" alt="like-article" class="add-like">
                     {% endif %}
                 </span>
                 <span>
@@ -24,3 +24,4 @@
         </a>
     </div>
 </div>
+<script src="/javascript/article-banner.js"></script>
