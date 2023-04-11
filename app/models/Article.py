@@ -1,7 +1,8 @@
 from datetime import datetime
 from app.db import Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
+from .Like import Like
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, select, func
+from sqlalchemy.orm import relationship, column_property
 
 class Article(Base):
     __tablename__ = 'articles'
@@ -15,3 +16,8 @@ class Article(Base):
 
     replies = relationship("Comment", cascade='all,delete')
     likes = relationship("Like", cascade='all,delete')
+
+    like_count = column_property(
+        # returns a count of rows where the article_id is equal to that of the id
+        select([func.count(Like.id)]).where(Like.article_id == id)
+    )
