@@ -1,7 +1,7 @@
 from flask import session, redirect
 from functools import wraps
 
-def login_required(): # define our decorator function
+def login_required(func): # define our decorator function
     @wraps(func) # wrapper that preserves metadata of a decorated function
     def wrapped_function(*args, **kwargs): # defines the inner function
         if session.get('loggedIn') == True: # checks if the client making the request is logged in
