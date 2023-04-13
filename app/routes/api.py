@@ -220,6 +220,7 @@ def search():
         'created_at': article.created_at,
         'title': article.title,
         'like_count': article.like_count,
+        'save_count': article.save_count,
         'likes': [
                 {
                     'id': like.user.id
@@ -256,6 +257,9 @@ def like():
 def removeLike():
     data = request.get_json()
     db = get_db()
+
+    print(data.get('article_id'))
+    print(session.get('user_id'))
 
     try:
         db.delete(db.query(Like).filter(
