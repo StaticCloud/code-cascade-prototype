@@ -14,8 +14,12 @@
                     {% endif %}
                 </span>
                 <span>
-                    <p>0</p>
-                    <img src="/icons/bookmark-regular.svg" alt="save-article" class="save-article">
+                    <p>{{article.save_count}}</p>
+                    {% if is_saved %}
+                        <img src="/icons/bookmark-green.svg" alt="save-article" class="unsave-article">
+                    {% else %}
+                        <img src="/icons/bookmark-regular.svg" alt="save-article" class="save-article">
+                    {% endif %}
                 </span>
             </div>
         {% endif %}

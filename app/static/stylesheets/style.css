@@ -465,7 +465,8 @@ main a[href="/search"] h2 {
 
 .add-like:hover,
 .remove-like:hover,
-.save-article:hover {
+.save-article:hover,
+.unsave-article:hover {
     cursor: pointer;
 }
 
