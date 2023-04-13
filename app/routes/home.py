@@ -45,12 +45,17 @@ def article(id):
     db = get_db()
     article = db.query(Article).filter(Article.id == id).one();
     is_liked = False;
+    is_saved = False;
 
     for like in article.likes:
         if like.user_id == session.get('user_id'):
             is_liked = True;
+    
+    for save in article.saves:
+        if save.user_id == session.get('user_id'):
+            is_saved = True;
 
-    return render_template('article.html', article=article, is_liked=is_liked, loggedIn=session.get('loggedIn'))
+    return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'))
 
 @bp.route('/login')
 def login():

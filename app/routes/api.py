@@ -1,7 +1,7 @@
 import sys
 from flask import Blueprint, request, jsonify, session, render_template
 from sqlalchemy import and_, extract
-from app.models import Comment, Article, User, Like
+from app.models import Comment, Article, User, Like, Save
 from app.utils.auth import login_required
 from app.db import get_db
 
@@ -220,6 +220,7 @@ def search():
         'created_at': article.created_at,
         'title': article.title,
         'like_count': article.like_count,
+        'save_count': article.save_count,
         'likes': [
                 {
                     'id': like.user.id
@@ -257,6 +258,9 @@ def removeLike():
     data = request.get_json()
     db = get_db()
 
+    print(data.get('article_id'))
+    print(session.get('user_id'))
+
     try:
         db.delete(db.query(Like).filter(
             and_(
@@ -269,5 +273,48 @@ def removeLike():
 
         db.rollback()
         return jsonify(message = 'Failed to remove like'), 404
+
+    return '', 200
+
+@bp.route('/article/save', methods=['POST'])
+@login_required
+def save():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        save = Save(
+            user_id = session.get('user_id'),
+            article_id = data.get('article_id')
+        )
+
+        db.add(save)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Failed to save article'), 500
+
+    return '', 200
+
+@bp.route('/article/unsave', methods=['DELETE'])
+@login_required
+def unsave():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        db.delete(db.query(Save).filter(
+            and_(
+                Save.article_id == data.get('article_id'),
+                Save.user_id == session.get('user_id')
+            )).one())
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Failed to unsave article'), 404
 
     return '', 200

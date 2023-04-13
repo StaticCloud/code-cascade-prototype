@@ -5,4 +5,5 @@ bp = Blueprint('profile', __name__, url_prefix='/profile')
 
 @bp.route('/')
 def dashboard():
+
     return render_template('profile.html', loggedIn=session.get('loggedIn'))
