@@ -12,7 +12,7 @@ class User(Base):
     isAdmin = Column(Boolean, default=False, nullable=False)
     email = Column(String(50), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
-    avatar = Column(String(50), nullable=False)
+    avatar = Column(String(50), default="/img/placeholder-pfp.png", nullable=False)
 
     @validates('email')
     def validate_email(self, key, email):
