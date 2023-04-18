@@ -25,43 +25,44 @@
         </div>
         <div class="profile-content">
             <ul class="profile-nav">
-                <li id="about">
+                <li class="bio highlighted">
                     <img src="/icons/user-solid.svg" alt="user-about-icon">
                 </li>
-                <li>
+                <li class="likes">
                     <img src="/icons/heart-solid.svg" alt="heart-icon">
                 </li>
-                <li>
+                <li class="saves">
                     <img src="/icons/bookmark-solid.svg" alt="bookmark-icon">
                 </li>
-                <li>
+                <li class="comments">
                     <img src="/icons/comment-solid.svg" alt="comment-icon">
                 </li>
             </ul>
             <div class="profile-body">
-                <div class="bio">
+                <div class="bio-section">
                     <p>{{user.bio}}</p>
                 </div>
-                <div class="liked-articles none">
+                <div class="liked-articles-section none">
                     {% for like in user.liked_articles %}
                         {% with article=like.article %}
                             {% include 'partials/article-profile-preview.html' %}
                         {% endwith %}
                     {% endfor %}
                 </div>
-                <div class="saved-articles none">
+                <div class="saved-articles-section none">
                     {% for save in user.saved_articles %}
                         {% with article=save.article %}
                             {% include 'partials/article-profile-preview.html' %}
                         {% endwith %}
                     {% endfor %}
                 </div>
-                <div class="recent-comments none">
+                <div class="recent-comments-section none">
 
                 </div>
             </div>
         </div>
     </div>
 </section>
+<script src="/javascript/profile.js"></script>
 
 {% endblock %}

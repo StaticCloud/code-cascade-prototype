@@ -523,7 +523,7 @@ code {
     flex-direction: column;
     width: 950px;
     background-color: var(--ternary);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
 }
 
 .profile-block ul {
@@ -539,7 +539,7 @@ code {
 
 .profile-content {
     background-color: var(--secondary);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
 }
 
 .profile-nav {
@@ -551,7 +551,17 @@ code {
     flex: 1;
     padding: 20px;
     text-align: center;
-    border-bottom: white 2px var(--primary);
+}
+
+.bio,
+.likes,
+.saves,
+.comments {
+    border-bottom: 2px var(--primary);
+}
+
+.highlighted {
+    border-bottom: 2px white solid;
 }
 
 .profile-nav img {
@@ -580,8 +590,4 @@ code {
 
 .user-info {
     margin: 0 30px;
-}
-
-#about {
-    border-bottom: white 2px solid;
 }
