@@ -42,21 +42,21 @@
                 <div class="bio">
                     <p>{{user.bio}}</p>
                 </div>
-                <div class="likedArticles">
+                <div class="liked-articles none">
                     {% for like in user.liked_articles %}
                         {% with article=like.article %}
-                            {% include 'partials/article-preview.html' %}
+                            {% include 'partials/article-profile-preview.html' %}
                         {% endwith %}
                     {% endfor %}
                 </div>
-                <div class="savedArticles">
+                <div class="saved-articles none">
                     {% for save in user.saved_articles %}
                         {% with article=save.article %}
-                            {% include 'partials/article-preview.html' %}
+                            {% include 'partials/article-profile-preview.html' %}
                         {% endwith %}
                     {% endfor %}
                 </div>
-                <div class="recentComments">
+                <div class="recent-comments none">
 
                 </div>
             </div>

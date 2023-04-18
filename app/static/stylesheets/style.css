@@ -10,6 +10,10 @@
     --primary-transparent: rgba(25, 25, 25, 0.63);
 }
 
+.none {
+    display: none;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -176,6 +180,14 @@ p {
     text-decoration: none;
 }
 
+.article-profile-preview {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
 .home-article-wrapper .article-preview:first-child {
     width: 790px;
 }
@@ -190,7 +202,13 @@ p {
     background-position: center;
 }
 
+.article-preview-image-profile {
+    z-index: 0;
+    background-position: bottom;
+}
+
 .article-preview-content-wrapper {
+    z-index: 1;
     margin: 18px;
 }
 
