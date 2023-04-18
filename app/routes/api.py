@@ -58,12 +58,6 @@ def articles(id):
             'author': article.author.username,
             'title': article.title,
             'category': article.category,
-            'likes': [
-                {
-                    'username': like.user.username,
-                }
-                for like in article.likes
-            ],
             'replies': [
                 {
                     'comment': reply.comment_text
@@ -220,13 +214,7 @@ def search():
         'created_at': article.created_at,
         'title': article.title,
         'like_count': article.like_count,
-        'save_count': article.save_count,
-        'likes': [
-                {
-                    'id': like.user.id
-                }
-                for like in article.likes
-            ]
+        'save_count': article.save_count
     } for article in articles];
 
 
