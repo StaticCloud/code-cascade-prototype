@@ -7,21 +7,31 @@ from app.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
-def getAllReplies(parent_reply):
+def getAllReplies(parent_reply, depth):
     replies = [];
     if parent_reply.replies:
         for reply in parent_reply.replies:
 
-            nested_replies = getAllReplies(reply)
+            nested_replies = getAllReplies(reply, depth)
 
             replies.append({
                 "id": reply.id,
                 "author": reply.author.username,
                 "comment_text": reply.comment_text,
-                "replies": nested_replies
+                "replies": nested_replies,
+                "total_replies": getReplyCount(reply),
+                'depth': depth + 1
             })
 
     return replies
+
+def getReplyCount(comment):
+    total = 0;
+    if comment.replies:
+        for reply in comment.replies:
+            total += 1 + getReplyCount(reply)
+    return total;
+
 
 @bp.route('/comment/<id>', methods=['GET'])
 def comments(id):
@@ -33,18 +43,20 @@ def comments(id):
         'comments': [
             {
                 # return comment text and replies for top-level comments
+                'depth': 0,
                 'comment_text': comment.comment_text,
-                'author': comment.author.username,
                 'replies': [
                     {
                         # return the id, comment text, and nested replies for each reply
                         "id": reply.id,
-                        "author": reply.author.username,
                         "comment_text": reply.comment_text,
-                        "replies": getAllReplies(reply) # recursive function to iterate through nested replies
+                        "replies": getAllReplies(reply, 1), # recursive function to iterate through nested replies
+                        'total_replies': getReplyCount(reply),
+                        'depth': 1
                     }
                     for reply in comment.replies # iterate through comment replies
-                ]
+                ],
+                'total_replies': getReplyCount(comment)
             }
             for comment in comments # iterate through all top level comments
         ]
@@ -55,7 +67,6 @@ def articles(id):
     db = get_db()
     article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
     return {
-            'author': article.author.username,
             'title': article.title,
             'category': article.category,
             'replies': [
