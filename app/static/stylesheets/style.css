@@ -521,9 +521,9 @@ code {
     text-align: left;
     display: flex;
     flex-direction: column;
-    width: 950px;
-    background-color: var(--ternary);
+    width: 700px;
     border-radius: 0.5rem;
+    margin: 0 auto;
 }
 
 .profile-block ul {
@@ -538,13 +538,12 @@ code {
 }
 
 .profile-content {
-    background-color: var(--secondary);
+    background-color: var(--ternary);
     border-radius: 0.5rem;
 }
 
 .profile-nav {
     display: flex;
-    background-color: var(--ternary);
 }
 
 .profile-nav li {
@@ -557,7 +556,16 @@ code {
 .likes,
 .saves,
 .comments {
+    transition: all 0.1s;
     border-bottom: 2px var(--primary);
+}
+
+.bio:hover,
+.likes:hover,
+.saves:hover,
+.comments:hover {
+    cursor: pointer;
+    border-bottom: 2px white solid;
 }
 
 .highlighted {
@@ -570,7 +578,7 @@ code {
 }
 
 .profile-body {
-    min-height: 350px;
+    min-height: 150px;
     padding: 30px;
 }
 
@@ -590,4 +598,8 @@ code {
 
 .user-info {
     margin: 0 30px;
+}
+
+.profile-section-wrapper {
+    margin-top: 80px;
 }

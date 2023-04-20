@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<section class="section-content-wrapper">
+<section class="profile-section-wrapper">
     <div class="profile-block">
         <div class="profile-user-info">
             <img src="{{user.avatar}}" alt="profile-picture">
@@ -39,24 +39,36 @@
                 </li>
             </ul>
             <div class="profile-body">
-                <div class="bio-section">
-                    <p>{{user.bio}}</p>
+                <div class="bio-section" data-content="bio">
+                    {% if user.bio|length > 1 %}
+                        <p>{{user.bio}}</p>
+                    {% else %}
+                        <p><i>User has not added a bio.</i></p>
+                    {% endif %}
                 </div>
-                <div class="liked-articles-section none">
-                    {% for like in user.liked_articles %}
-                        {% with article=like.article %}
-                            {% include 'partials/article-profile-preview.html' %}
-                        {% endwith %}
-                    {% endfor %}
+                <div class="liked-articles-section none" data-content="likes">
+                    {% if user.liked_articles|length > 0 %}
+                        {% for like in user.liked_articles %}
+                            {% with article=like.article %}
+                                {% include 'partials/article-profile-preview.html' %}
+                            {% endwith %}
+                        {% endfor %}
+                    {% else %}
+                        <p><i>User has not liked any articles.</i></p>
+                    {% endif %}
                 </div>
-                <div class="saved-articles-section none">
-                    {% for save in user.saved_articles %}
-                        {% with article=save.article %}
-                            {% include 'partials/article-profile-preview.html' %}
-                        {% endwith %}
-                    {% endfor %}
+                <div class="saved-articles-section none" data-content="saves">
+                    {% if user.saved_articles|length > 0 %}
+                        {% for save in user.saved_articles %}
+                            {% with article=save.article %}
+                                {% include 'partials/article-profile-preview.html' %}
+                            {% endwith %}
+                        {% endfor %}
+                    {% else %}
+                        <p><i>User has not saved any articles.</i></p>
+                    {% endif %}
                 </div>
-                <div class="recent-comments-section none">
+                <div class="recent-comments-section none" data-content="comments">
 
                 </div>
             </div>

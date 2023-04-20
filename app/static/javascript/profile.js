@@ -17,4 +17,10 @@ profileNav.addEventListener("click", (e) => {
     })
 
     element.classList.add('highlighted')
+
+    Array.from(document.querySelector(".profile-body").children).forEach(child => {
+        child.classList.add('none')
+    })
+
+    document.querySelector(`[data-content=${element.classList[0]}]`).classList.remove('none')
 })
