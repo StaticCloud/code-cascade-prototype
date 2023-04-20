@@ -185,7 +185,11 @@ p {
     align-items: flex-end;
     position: relative;
     text-decoration: none;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.article-profile-preview:last-child {
+    margin-bottom: 0;
 }
 
 .home-article-wrapper .article-preview:first-child {
