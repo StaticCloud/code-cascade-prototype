@@ -521,7 +521,8 @@ code {
 }
 
 /* ABOUT */
-.profile-block {
+.profile-block,
+.edit-profile-block {
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -604,7 +605,8 @@ code {
     margin: 0 30px;
 }
 
-.profile-section-wrapper {
+.profile-section-wrapper,
+.edit-profile-wrapper {
     margin-top: 80px;
     animation-name: fade-in-profile;
     animation-duration: 0.5s;
