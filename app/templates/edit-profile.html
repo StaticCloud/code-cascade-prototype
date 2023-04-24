@@ -3,30 +3,31 @@
 {% block body %}
 
 <section class="edit-profile-wrapper">
-    <section class="edit-profile-block">
+    <section class="input-form edit-profile-block" style="padding-top: 0; padding-bottom: 0;">
         <h1>Edit Profile</h1>
 
         <form action="submit">
             <fieldset>
-                <h2>Edit Profile Picture</h2>
+                <h3>Edit Profile Picture</h3>
+                <img src="{{user.avatar}}" alt="user-avatar">
             </fieldset>
             <fieldset>
                 <label for="bio-input">
-                    <h2>Edit Bio</h2>
+                    <h3>Edit Bio</h3>
                 </label>
-                <input type="text" id="bio-input">
+                <textarea type="text" id="bio-input" placeholder="Bio" maxlength="250" rows="5">{{user.bio}}</textarea>
             </fieldset>
             <fieldset>
                 <label for="linkedin-input">
-                    <h2>Edit LinkedIn</h2>
+                    <h3>Edit LinkedIn</h3>
                 </label>
-                <input type="text" id="linkedin-input">
+                <input type="text" id="linkedin-input" placeholder="LinkedIn" value="{{user.linkedin}}">
             </fieldset>
             <fieldset>
                 <label for="github-input">
-                    <h2>Edit GitHub</h2>
+                    <h3>Edit GitHub</h3>
                 </label>
-                <input type="text" id="github-input">
+                <input type="text" id="github-input" placeholder="GitHub">
             </fieldset>
             <fieldset>
                 <button>Save Profile</button>

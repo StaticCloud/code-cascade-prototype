@@ -28,4 +28,4 @@ const signup = async (e) => {
     
 }
 
-document.querySelector('.auth-form').addEventListener('submit', signup);
+document.querySelector('.input-form').addEventListener('submit', signup);
