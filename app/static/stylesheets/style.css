@@ -641,6 +641,30 @@ code {
     border-radius: 50%;
 }
 
+.avatar-selection {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto;
+}
+
+.avatar-selection img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+
+    border: 5px solid var(--primary);
+}
+
+.edit-avatar-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-avatar-view > img {
+    height: 180px;
+}
+
 @keyframes fade-in-profile {
     from {
         opacity: 0;
