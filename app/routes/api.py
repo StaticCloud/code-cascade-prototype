@@ -112,6 +112,13 @@ def updateUser(id):
 
     try:
         user = db.query(User).filter(User.id == id).one()
+        
+        user.bio = data.get('bio')
+        user.linkedin = data.get('linkedin')
+        user.github = data.get('github')
+        user.avatar = data.get('avatar')
+
+        db.commit();
     except:
         print(sys.exc_info()[0])
 

@@ -14,6 +14,8 @@ class User(Base):
     password = Column(String(100), nullable=False)
     avatar = Column(String(50), default="/img/placeholder-pfp.png", nullable=False)
     bio = Column(String(250), nullable=False, default="")
+    linkedin = Column(String(50), nullable=False, default="")
+    github = Column(String(50), nullable=False, default="")
 
     liked_articles = relationship("Like")
     saved_articles = relationship("Save")
