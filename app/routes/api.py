@@ -104,11 +104,27 @@ def addArticle():
             'category': article.category
     }
 
+@bp.route('/user/<id>', methods=['PUT'])
+@login_required
+def updateUser(id):
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        user = db.query(User).filter(User.id == id).one()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'User not found'), 404
+    
+    return '', 204
+
+
 @bp.route('/signup', methods=['POST'])
 def signup():
     # get the JSON data from the request
     data = request.get_json()
-    print(data)
     db = get_db()
 
     # create a new user using the credentials provided by the client
