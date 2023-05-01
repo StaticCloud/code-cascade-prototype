@@ -104,14 +104,14 @@ def addArticle():
             'category': article.category
     }
 
-@bp.route('/user/<id>', methods=['PUT'])
+@bp.route('/editProfile', methods=['PUT'])
 @login_required
-def updateUser(id):
+def updateUser():
     data = request.get_json()
     db = get_db()
 
     try:
-        user = db.query(User).filter(User.id == id).one()
+        user = db.query(User).filter(User.id == session.get('user_id')).one()
         
         user.bio = data.get('bio')
         user.linkedin = data.get('linkedin')
