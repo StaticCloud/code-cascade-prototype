@@ -16,8 +16,8 @@ class Article(Base):
     created_at = Column(DateTime, default=datetime.now)
 
     replies = relationship("Comment", cascade='all,delete')
-    likes = relationship("Like", cascade='all,delete')
-    saves = relationship("Save", cascade='all,delete')
+    likes = relationship("Like", cascade='all,delete', back_populates="article")
+    saves = relationship("Save", cascade='all,delete', back_populates="article")
 
     like_count = column_property(
         # returns a count of rows where the article_id is equal to that of the id

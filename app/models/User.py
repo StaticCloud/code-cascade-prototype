@@ -1,6 +1,6 @@
 from app.db import Base
 from sqlalchemy import Column, Integer, String, Boolean
-from sqlalchemy.orm import validates
+from sqlalchemy.orm import validates, relationship
 import bcrypt
 
 salt = bcrypt.gensalt()
@@ -12,7 +12,13 @@ class User(Base):
     isAdmin = Column(Boolean, default=False, nullable=False)
     email = Column(String(50), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
-    avatar = Column(String(50), nullable=False)
+    avatar = Column(String(50), default="/img/placeholder-pfp.png", nullable=False)
+    bio = Column(String(250), nullable=False, default="")
+    linkedin = Column(String(50), nullable=False, default="")
+    github = Column(String(50), nullable=False, default="")
+
+    liked_articles = relationship("Like")
+    saved_articles = relationship("Save")
 
     @validates('email')
     def validate_email(self, key, email):

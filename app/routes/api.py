@@ -1,5 +1,5 @@
 import sys
-from flask import Blueprint, request, jsonify, session, render_template
+from flask import Blueprint, request, jsonify, session
 from sqlalchemy import and_, extract
 from app.models import Comment, Article, User, Like, Save
 from app.utils.auth import login_required
@@ -7,21 +7,31 @@ from app.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
-def getAllReplies(parent_reply):
+def getAllReplies(parent_reply, depth):
     replies = [];
     if parent_reply.replies:
         for reply in parent_reply.replies:
 
-            nested_replies = getAllReplies(reply)
+            nested_replies = getAllReplies(reply, depth)
 
             replies.append({
                 "id": reply.id,
                 "author": reply.author.username,
                 "comment_text": reply.comment_text,
-                "replies": nested_replies
+                "replies": nested_replies,
+                "total_replies": getReplyCount(reply),
+                'depth': depth + 1
             })
 
     return replies
+
+def getReplyCount(comment):
+    total = 0;
+    if comment.replies:
+        for reply in comment.replies:
+            total += 1 + getReplyCount(reply)
+    return total;
+
 
 @bp.route('/comment/<id>', methods=['GET'])
 def comments(id):
@@ -33,18 +43,20 @@ def comments(id):
         'comments': [
             {
                 # return comment text and replies for top-level comments
+                'depth': 0,
                 'comment_text': comment.comment_text,
-                'author': comment.author.username,
                 'replies': [
                     {
                         # return the id, comment text, and nested replies for each reply
                         "id": reply.id,
-                        "author": reply.author.username,
                         "comment_text": reply.comment_text,
-                        "replies": getAllReplies(reply) # recursive function to iterate through nested replies
+                        "replies": getAllReplies(reply, 1), # recursive function to iterate through nested replies
+                        'total_replies': getReplyCount(reply),
+                        'depth': 1
                     }
                     for reply in comment.replies # iterate through comment replies
-                ]
+                ],
+                'total_replies': getReplyCount(comment)
             }
             for comment in comments # iterate through all top level comments
         ]
@@ -55,15 +67,8 @@ def articles(id):
     db = get_db()
     article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
     return {
-            'author': article.author.username,
             'title': article.title,
             'category': article.category,
-            'likes': [
-                {
-                    'username': like.user.username,
-                }
-                for like in article.likes
-            ],
             'replies': [
                 {
                     'comment': reply.comment_text
@@ -99,11 +104,34 @@ def addArticle():
             'category': article.category
     }
 
+@bp.route('/editProfile', methods=['PUT'])
+@login_required
+def updateUser():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        user = db.query(User).filter(User.id == session.get('user_id')).one()
+        
+        user.bio = data.get('bio')
+        user.linkedin = data.get('linkedin')
+        user.github = data.get('github')
+        user.avatar = data.get('avatar')
+
+        db.commit();
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'User not found'), 404
+    
+    return '', 204
+
+
 @bp.route('/signup', methods=['POST'])
 def signup():
     # get the JSON data from the request
     data = request.get_json()
-    print(data)
     db = get_db()
 
     # create a new user using the credentials provided by the client
@@ -188,12 +216,6 @@ def logout():
     session.clear()
     return jsonify(message = 'Logout successful!'), 200
 
-# @bp.route('/article_render/<id>')
-# def article_render(id):
-#     db = get_db()
-#     article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
-#     return render_template(article.article_path)
-
 @bp.route('/search', methods=['GET'])
 def search():
     db = get_db()
@@ -220,13 +242,7 @@ def search():
         'created_at': article.created_at,
         'title': article.title,
         'like_count': article.like_count,
-        'save_count': article.save_count,
-        'likes': [
-                {
-                    'id': like.user.id
-                }
-                for like in article.likes
-            ]
+        'save_count': article.save_count
     } for article in articles];
 
 
@@ -257,9 +273,6 @@ def like():
 def removeLike():
     data = request.get_json()
     db = get_db()
-
-    print(data.get('article_id'))
-    print(session.get('user_id'))
 
     try:
         db.delete(db.query(Like).filter(
