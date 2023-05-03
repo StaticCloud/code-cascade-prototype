@@ -1,5 +1,5 @@
 import sys
-from flask import Blueprint, request, jsonify, session, render_template
+from flask import Blueprint, request, jsonify, session
 from sqlalchemy import and_, extract
 from app.models import Comment, Article, User, Like, Save
 from app.utils.auth import login_required
@@ -216,12 +216,6 @@ def logout():
     session.clear()
     return jsonify(message = 'Logout successful!'), 200
 
-# @bp.route('/article_render/<id>')
-# def article_render(id):
-#     db = get_db()
-#     article = db.query(Article).filter(Article.id == id).order_by(Article.created_at.desc()).one()
-#     return render_template(article.article_path)
-
 @bp.route('/search', methods=['GET'])
 def search():
     db = get_db()
@@ -279,9 +273,6 @@ def like():
 def removeLike():
     data = request.get_json()
     db = get_db()
-
-    print(data.get('article_id'))
-    print(session.get('user_id'))
 
     try:
         db.delete(db.query(Like).filter(
