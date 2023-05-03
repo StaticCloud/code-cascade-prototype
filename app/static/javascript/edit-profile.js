@@ -1,5 +1,12 @@
 let avatar = document.querySelector('img[alt="user-avatar"]').getAttribute('src')
 
+// add selected image styling to proper icon
+Array.from(document.querySelector('.avatar-selection').children).forEach(child => {
+    if (child.getAttribute('src') == avatar) {
+        child.classList.add('selected-avatar')
+    }
+})
+
 const edit = async (e) => {
     e.preventDefault();
 
@@ -26,11 +33,33 @@ const edit = async (e) => {
 }
 
 const selectAvatar = (e) => {
+    // remove selected styling from icons
     if (e.target.hasAttribute('src')) {
-        avatar = e.target.getAttribute('src')
-    }
+        Array.from(document.querySelector('.avatar-selection').children).forEach(child => {
+            child.classList.add('unselected-avatar')
+        })
 
-    document.querySelector('img[alt="user-avatar"]').setAttribute('src', avatar);
+        avatar = e.target.getAttribute('src')
+        e.target.classList.remove('unselected-avatar')
+        e.target.classList.add('selected-avatar')
+
+        document.querySelector('img[alt="user-avatar"]').setAttribute('src', avatar)
+    
+        document.querySelector('img[alt="user-avatar"]').animate([
+            {
+                padding: "15px"
+            },
+            {
+                padding: "7px"
+            },
+            {
+                padding: "15px"
+            }
+        ], {
+            easing: "ease-out",
+            duration: 200
+        }).play();
+    }
 }
 
 document.querySelector('.avatar-selection').addEventListener('click', selectAvatar);

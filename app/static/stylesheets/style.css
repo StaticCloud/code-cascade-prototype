@@ -649,6 +649,7 @@ code {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto;
+    grid-gap: 8px;
 }
 
 .avatar-selection img {
@@ -656,7 +657,21 @@ code {
     height: 100%;
     width: 100%;
 
-    border: 5px solid var(--primary);
+    border: 5px solid var(--code);
+    transition: all 0.2s;
+}
+
+.avatar-selection img:hover {
+    cursor: pointer;
+    border: 5px solid white;
+}
+
+.avatar-selection .selected-avatar {
+    border: 5px solid white;
+}
+
+.avatar-selection .unselected-avatar {
+    border: 5px solid var(--code);
 }
 
 .edit-avatar-view {
@@ -667,6 +682,7 @@ code {
 
 .edit-avatar-view > img {
     height: 180px;
+    padding: 15px;
 }
 
 @keyframes fade-in-profile {
