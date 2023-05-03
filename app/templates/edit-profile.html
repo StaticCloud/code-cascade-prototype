@@ -1,0 +1,52 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
+<section class="edit-profile-wrapper">
+    <section class="input-form edit-profile-block">
+        <h2>Edit Profile</h2>
+
+        <form class="profile-edit-form" action="submit">
+            <fieldset>
+                <h3>Edit Avatar</h3>
+                <div class="edit-avatar-view">
+                    <img src="{{user.avatar}}" alt="user-avatar">
+                    <div class="avatar-selection">
+                        <img src="/img/avatar_1.png" alt="user-avatar-1">
+                        <img src="/img/avatar_2.png" alt="user-avatar-2">
+                        <img src="/img/avatar_3.png" alt="user-avatar-3">
+                        <img src="/img/avatar_4.png" alt="user-avatar-4">
+                        <img src="/img/avatar_5.png" alt="user-avatar-5">
+                        <img src="/img/avatar_6.png" alt="user-avatar-6">
+                        <img src="/img/avatar_7.png" alt="user-avatar-7">
+                        <img src="/img/avatar_8.png" alt="user-avatar-8">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <label for="bio-input">
+                    <h3>Edit Bio</h3>
+                </label>
+                <textarea type="text" id="bio-input" placeholder="Bio" maxlength="250" rows="5">{{user.bio}}</textarea>
+            </fieldset>
+            <fieldset>
+                <label for="linkedin-input">
+                    <h3>Edit LinkedIn</h3>
+                </label>
+                <input type="text" id="linkedin-input" placeholder="LinkedIn" value="{{user.linkedin}}">
+            </fieldset>
+            <fieldset>
+                <label for="github-input">
+                    <h3>Edit GitHub</h3>
+                </label>
+                <input type="text" id="github-input" placeholder="GitHub" value="{{user.github}}">
+            </fieldset>
+            <button type="submit">
+                Save Profile
+            </button>
+        </form>
+    </section>
+</section>
+<script src="/javascript/edit-profile.js"></script>
+
+{% endblock %}

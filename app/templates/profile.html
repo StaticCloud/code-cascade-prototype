@@ -2,15 +2,21 @@
 
 {% block body %}
 
-<section class="section-content-wrapper">
+<section class="profile-section-wrapper">
     <div class="profile-block">
         <div class="profile-user-info">
-            <img src="/img/placeholder-pfp.png" alt="profile-picture">
+            <img src="{{user.avatar}}" alt="profile-picture">
             <div class="user-info">
-                <h1>alex_stone</h1>
+                <a class="edit-profile-button" href="/profile/edit">
+                    <h3>Edit Profile</h3>
+                    <img src="/svg/pencil-solid.svg" alt="">
+                </a>
+                <h1>{{user.username}}</h1>
                 <ul>
                     <li>
-                        <img src="/icons/envelope-solid.svg" alt="email-icon">
+                        <a href="mailto:{{user.email}}" target="_blank">
+                            <img src="/icons/envelope-solid.svg" alt="email-icon">
+                        </a>
                     </li>
                     <li>
                         <img src="/icons/github.svg" alt="github-icon">
@@ -23,24 +29,56 @@
         </div>
         <div class="profile-content">
             <ul class="profile-nav">
-                <li id="about">
+                <li class="bio highlighted">
                     <img src="/icons/user-solid.svg" alt="user-about-icon">
                 </li>
-                <li>
+                <li class="likes">
                     <img src="/icons/heart-solid.svg" alt="heart-icon">
                 </li>
-                <li>
+                <li class="saves">
                     <img src="/icons/bookmark-solid.svg" alt="bookmark-icon">
                 </li>
-                <li>
+                <li class="comments">
                     <img src="/icons/comment-solid.svg" alt="comment-icon">
                 </li>
             </ul>
             <div class="profile-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <div class="bio-section" data-content="bio">
+                    {% if user.bio|length > 1 %}
+                        <p>{{user.bio}}</p>
+                    {% else %}
+                        <p><i>User has not added a bio.</i></p>
+                    {% endif %}
+                </div>
+                <div class="liked-articles-section none" data-content="likes">
+                    {% if user.liked_articles|length > 0 %}
+                        {% for like in user.liked_articles %}
+                            {% with article=like.article %}
+                                {% include 'partials/article-profile-preview.html' %}
+                            {% endwith %}
+                        {% endfor %}
+                    {% else %}
+                        <p><i>User has not liked any articles.</i></p>
+                    {% endif %}
+                </div>
+                <div class="saved-articles-section none" data-content="saves">
+                    {% if user.saved_articles|length > 0 %}
+                        {% for save in user.saved_articles %}
+                            {% with article=save.article %}
+                                {% include 'partials/article-profile-preview.html' %}
+                            {% endwith %}
+                        {% endfor %}
+                    {% else %}
+                        <p><i>User has not saved any articles.</i></p>
+                    {% endif %}
+                </div>
+                <div class="recent-comments-section none" data-content="comments">
+
+                </div>
             </div>
         </div>
     </div>
 </section>
+<script src="/javascript/profile.js"></script>
 
 {% endblock %}
