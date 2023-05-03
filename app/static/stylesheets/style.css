@@ -89,9 +89,10 @@ textarea {
     display: flex;
 }
 
-#nav-wrapper nav p {
+#nav-wrapper nav h3 {
+    font-size: 1.5rem;
     margin: 0 10px;
-    border: rgba(255, 255, 255, 0) 2px solid;
+    border: rgba(255, 255, 255, 0) 3px solid;
     transition: all 0.2s;
 }
 
@@ -99,9 +100,9 @@ textarea {
     text-decoration: none;
 }
 
-#nav-wrapper nav p:hover {
+#nav-wrapper nav h3:hover {
     cursor: pointer;
-    border-bottom: white 2px solid;
+    border-bottom: white 3px solid;
 }
 
 .nav-scroll {
@@ -278,7 +279,7 @@ textarea {
     padding: 10px;
     font-size: 0.9rem;
     border: none;
-    color:rgb(0,0,0);
+    color: black;
     display: block;
 }
 
@@ -300,6 +301,7 @@ textarea {
 .input-form textarea {
     margin: 15px 0;
     width: 100%;
+    border-radius: 5px;
 }
 
 .auth-bottom-link {
@@ -313,10 +315,6 @@ textarea {
 
 .input-form fieldset {
     border: none;
-    padding: 0 10px 10px 10px;
-    margin: 15px 0;
-    border-radius: 10px;
-    background-color: black;
 }
 
 /* SEARCH */
@@ -541,6 +539,12 @@ code {
     width: 700px;
     border-radius: 0.5rem;
     margin: 0 auto;
+    background-color: var(--ternary);
+}
+
+.profile-edit-form button {
+    margin: 10px 0 0 0;
+    width: 8rem;
 }
 
 .profile-block ul {
@@ -574,7 +578,7 @@ code {
     display: inline-flex;
     padding: 10px;
     background-color: var(--secondary);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .edit-profile-button img {
@@ -632,7 +636,7 @@ code {
 
 .profile-section-wrapper,
 .edit-profile-wrapper {
-    margin-top: 80px;
+    margin: 80px 0;
     animation-name: fade-in-profile;
     animation-duration: 0.5s;
 }

@@ -3,7 +3,7 @@
 {% block body %}
 
 <section class="edit-profile-wrapper">
-    <section class="input-form edit-profile-block" style="padding-top: 0; padding-bottom: 20px;">
+    <section class="input-form edit-profile-block">
         <h2>Edit Profile</h2>
 
         <form class="profile-edit-form" action="submit">
@@ -41,7 +41,9 @@
                 </label>
                 <input type="text" id="github-input" placeholder="GitHub" value="{{user.github}}">
             </fieldset>
-            <button type="submit">Save Profile</button>
+            <button type="submit">
+                Save Profile
+            </button>
         </form>
     </section>
 </section>
