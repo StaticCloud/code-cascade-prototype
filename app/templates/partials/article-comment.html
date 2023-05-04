@@ -1,0 +1,12 @@
+<div class="comment">
+    <div class="comment-wrapper">
+        <img src="{{ comment.author.avatar }}" alt="author-img">
+        <div class="comment-body">
+            <h2>{{ comment.author.username }}</h2>
+            <p>{{ comment.comment_text }}</p>
+        </div>
+    </div>
+    {% for comment in comment.replies %}
+        {% include "partials/article-comment.html" %}
+    {% endfor %}
+</div>

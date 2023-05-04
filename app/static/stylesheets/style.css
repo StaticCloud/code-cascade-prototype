@@ -462,7 +462,8 @@ main a[href="/search"] h2 {
 }
 
 /* ARTICLE CONTENT */
-.article-content {
+.article-content,
+.comment-content {
     display: block;
     margin: 0 auto;
     padding: 70px 0;
@@ -698,4 +699,25 @@ code {
         opacity: 1;
         margin-top: 80px;
     }
+}
+
+
+/* COMMENTS */
+.comment {
+    padding: 20px 0 0 70px;
+    border-left: 2px solid white;
+}
+
+.comment-wrapper {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.comment-wrapper img {
+    height: 60px;
+    border-radius: 70px;
+}
+
+.comment-body {
+    margin-left: 15px;
 }

@@ -7,10 +7,12 @@
         <div class="profile-user-info">
             <img src="{{user.avatar}}" alt="profile-picture">
             <div class="user-info">
-                <a class="edit-profile-button" href="/profile/edit">
-                    <h3>Edit Profile</h3>
-                    <img src="/svg/pencil-solid.svg" alt="">
-                </a>
+                {%if authUser %}
+                    <a class="edit-profile-button" href="/profile/edit">
+                        <h3>Edit Profile</h3>
+                        <img src="/svg/pencil-solid.svg" alt="">
+                    </a>
+                {% endif %}
                 <h1>{{user.username}}</h1>
                 <ul>
                     <li>
