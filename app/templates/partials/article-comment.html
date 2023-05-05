@@ -3,7 +3,17 @@
         <img src="{{ comment.author.avatar }}" alt="author-img">
         <div class="comment-body">
             <h2>{{ comment.author.username }}</h2>
+            <h5>{{ comment.created_at|format_date }}</h5>
             <p>{{ comment.comment_text }}</p>
+            {% if loggedIn %}
+            <button class="comment-reply-button">
+                <h4>Reply</h4>
+            </button>
+            {% else %}
+            <button class="comment-reply-button">
+                <h4>Login to Comment</h4>
+            </button>
+            {% endif %}
         </div>
     </div>
     {% for comment in comment.replies %}

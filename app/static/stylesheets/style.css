@@ -704,13 +704,13 @@ code {
 
 /* COMMENTS */
 .comment {
-    padding: 20px 0 0 70px;
-    border-left: 2px solid white;
+    padding-left: 70px;
+    border-left: 1px solid white;
 }
 
 .comment-wrapper {
     display: flex;
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
 .comment-wrapper img {
@@ -720,4 +720,21 @@ code {
 
 .comment-body {
     margin-left: 15px;
+}
+
+.comment-body p {
+    margin: 15px 0;
+}
+
+.comment-content > .comment {
+    border: none;
+    padding: 10px 0;
+}
+
+.comment-reply-button {
+    border: none;
+
+    background-color: var(--secondary);
+    padding: 7px 15px;
+    border-radius: 7px;
 }
