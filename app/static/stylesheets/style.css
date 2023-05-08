@@ -301,6 +301,7 @@ textarea {
 
 .input-form input,
 .input-form textarea {
+    color: black;
     padding: 10px;
     font-size: 0.9rem;
     border: none;

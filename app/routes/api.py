@@ -62,6 +62,28 @@ def comments(id):
         ]
     }
 
+@bp.route('/reply', methods=['POST'])
+def reply():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        comment = Comment(
+            parent_comment=data.get('parent_comment'),
+            comment_text=data.get('comment_text'),
+            author_id=session.get('user_id')
+        )
+
+        db.add(comment)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Create comment failed'), 500
+    
+    return '', 204
+
 @bp.route('/article/<id>', methods=['GET'])
 def articles(id):
     db = get_db()
