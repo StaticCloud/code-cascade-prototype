@@ -497,6 +497,12 @@ main a[href="/search"] h2 {
     width: 1020px;
 }
 
+.comment-form-content {
+    display: block;
+    margin: 0 auto;
+    width: 1020px;
+}
+
 .like-or-save {
     display: inline-flex;
     justify-content: center;

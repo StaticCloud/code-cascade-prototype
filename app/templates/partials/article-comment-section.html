@@ -1,8 +1,6 @@
 <content class="comment-content">
-    <h1>Comments</h1>
     {% for comment in article.replies %}
         {% include "partials/article-comment.html" %}
     {% endfor %}
-    {% include "partials/article-comment-form.html" %}
 </content>
 <script src="/javascript/comment-section.js"></script>
