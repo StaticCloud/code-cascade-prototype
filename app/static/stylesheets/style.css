@@ -80,7 +80,9 @@ textarea {
     padding: 10px;
     color: black;
     resize: none;
+    border: none;
     border-radius: 5px;
+    outline: none;
 }
 
 /* SECTIONS */

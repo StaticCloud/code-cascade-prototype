@@ -6,7 +6,7 @@
             <h5>{{ comment.created_at|format_date }}</h5>
             <p>{{ comment.comment_text }}</p>
             {% if loggedIn %}
-            {% include "partials/comment-form.html" %}
+            {% include "partials/reply-form.html" %}
             <button class="comment-reply-button" id="open-form">
                 Reply
             </button>
