@@ -746,13 +746,27 @@ code {
     padding: 20px 0;
 }
 
+.comment-wrapper img,
+.comment-form img {
+    border-radius: 70px;
+}
+
 .comment-wrapper img {
     height: 60px;
-    border-radius: 70px;
+}
+
+.comment-form img {
+    height: 75px;
+    margin: 15px 15px 0 0;
+}
+
+.comment-form textarea {
+    width: 100%;
 }
 
 .comment-body {
     margin-left: 15px;
+    width: 100%;
 }
 
 .comment-body p {
@@ -770,4 +784,8 @@ code {
     background-color: var(--secondary);
     padding: 7px 15px;
     border-radius: 7px;
+}
+
+[name="comment-text"] {
+    width: 100%;
 }

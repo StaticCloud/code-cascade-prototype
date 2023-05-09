@@ -162,6 +162,8 @@ def updateUser():
         user.github = data.get('github')
         user.avatar = data.get('avatar')
 
+        session['avatar'] = user.avatar
+
         db.commit();
     except:
         print(sys.exc_info()[0])
@@ -183,7 +185,8 @@ def signup():
         user = User(
             username = data.get('username'),
             email = data.get('email'),
-            password = data.get('password')
+            password = data.get('password'),
+            avatar = '/img/avatar_8.png'
         )
 
         # add it and commit to the database
@@ -210,6 +213,7 @@ def signup():
     session['user_id'] = user.id
     session['isAdmin'] = user.isAdmin
     session['loggedIn'] = True
+    session['avatar'] = user.avatar
 
     # return the user input in JSON if the request was successful
     return {
@@ -247,6 +251,7 @@ def login():
     session['user_id'] = user.id
     session['isAdmin'] = user.isAdmin
     session['loggedIn'] = True
+    session['avatar'] = user.avatar
 
     # return the user input in JSON if the request was successful
     return {

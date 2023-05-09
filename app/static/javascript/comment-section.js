@@ -3,12 +3,12 @@ document.querySelector('.comment-content').addEventListener('click', async (e) =
 
     if (e.target.id == "open-form") {
         e.target.classList.add("none")
-        e.target.parentElement.querySelector('.comment-form').classList.remove("none")
+        e.target.parentElement.parentElement.querySelector('.comment-form').classList.remove("none")
     }
 
     if (e.target.id == "cancel-button") {
-        e.target.parentElement.parentElement.querySelector('#open-form').classList.remove("none")
-        e.target.parentElement.classList.add("none");
+        e.target.parentElement.parentElement.parentElement.querySelector('#open-form').classList.remove("none")
+        e.target.parentElement.parentElement.classList.add("none");
     }
 
     if (e.target.id == "submit-button") {
@@ -31,4 +31,11 @@ document.querySelector('.comment-content').addEventListener('click', async (e) =
         }
 
     }
+})
+
+window.addEventListener('load', () => {
+    let textarea = document.querySelector('textarea[name="comment-text"]');
+    let replyTextarea = document.querySelectorAll('textarea[name="comment"]')
+    replyTextarea.forEach(text => text.value = '')
+    textarea.value = '';
 })

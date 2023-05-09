@@ -55,7 +55,7 @@ def article(id):
         if save.user_id == session.get('user_id'):
             is_saved = True;
 
-    return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'))
+    return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
 
 @bp.route('/login')
 def login():
