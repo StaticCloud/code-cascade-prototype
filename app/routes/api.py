@@ -62,14 +62,14 @@ def comments(id):
         ]
     }
 
-@bp.route('/reply', methods=['POST'])
-def reply():
+@bp.route('/comment', methods=['POST'])
+def comment():
     data = request.get_json()
     db = get_db()
 
     try:
         comment = Comment(
-            parent_comment=data.get('parent_comment'),
+            article_id=data.get('article_id'),
             comment_text=data.get('comment_text'),
             author_id=session.get('user_id')
         )
@@ -81,6 +81,28 @@ def reply():
 
         db.rollback()
         return jsonify(message = 'Create comment failed'), 500
+    
+    return '', 204
+
+@bp.route('/reply', methods=['POST'])
+def reply():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        reply = Comment(
+            parent_comment=data.get('parent_comment'),
+            comment_text=data.get('comment_text'),
+            author_id=session.get('user_id')
+        )
+
+        db.add(reply)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Create reply failed'), 500
     
     return '', 204
 
