@@ -54,6 +54,8 @@ def article(id):
     for save in article.saves:
         if save.user_id == session.get('user_id'):
             is_saved = True;
+    
+    article.replies = [reply for reply in article.replies if reply.parent_comment == None]
 
     return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
 

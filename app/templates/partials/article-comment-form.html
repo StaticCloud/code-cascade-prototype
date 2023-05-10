@@ -1,3 +1,4 @@
+{% if loggedIn %}
 <section class="comment-form-content">
     <h1>Comments</h1>
     <form class="comment-form flex" id="add-article-comment"]>
@@ -12,3 +13,8 @@
     </form>
 </section>
 <script src="/javascript/add-article-comment.js"></script>
+{% else %}
+<section class="comment-form-content">
+    <h1>Comments</h1>
+</section>
+{% endif %}

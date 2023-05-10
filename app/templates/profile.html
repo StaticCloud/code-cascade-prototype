@@ -75,7 +75,13 @@
                     {% endif %}
                 </div>
                 <div class="recent-comments-section none" data-content="comments">
-
+                    {% if user.comments|length > 0 %}
+                        {% for comment in user.comments %}
+                            <p>{{ comment.article.title }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p><i>User has not left any comments.</i></p>
+                    {% endif %}
                 </div>
             </div>
         </div>

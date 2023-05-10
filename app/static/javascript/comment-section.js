@@ -14,12 +14,16 @@ document.querySelector('.comment-content').addEventListener('click', async (e) =
     if (e.target.id == "submit-button") {
         const comment_text = e.target.parentElement.querySelector('textarea[name="comment"]').value.trim();
         const parent_comment = e.target.closest('[data-id]').getAttribute('data-id');
-    
+        const article_id = window.location.toString().split('/')[
+            window.location.toString().split('/').length - 1
+        ][0];
+
         const response = await fetch('/api/reply', {
             method: 'POST',
             body: JSON.stringify({
                 comment_text,
-                parent_comment
+                parent_comment,
+                article_id
             }),
             headers: { 'Content-Type': 'application/json' }
         })
