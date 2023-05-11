@@ -786,6 +786,30 @@ code {
     border-radius: 7px;
 }
 
+.comment-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #111111;
+    margin-top: 20px;
+}
+
+.comment-link p {
+    margin-top: 6px;
+}
+
+.comment-link:first-child {
+    margin-top: 0px;
+}
+
+.comment-link img {
+    width: 80px;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+
 [name="comment-text"] {
     width: 100%;
 }

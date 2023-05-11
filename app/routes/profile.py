@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, redirect
-from app.models import User
+from app.models import User, Comment
 from app.db import get_db
 
 bp = Blueprint('profile', __name__, url_prefix='/profile')

@@ -77,7 +77,7 @@
                 <div class="recent-comments-section none" data-content="comments">
                     {% if user.comments|length > 0 %}
                         {% for comment in user.comments %}
-                            <p>{{ comment.article.title }}</p>
+                            {% include 'partials/profile-comment.html' %}
                         {% endfor %}
                     {% else %}
                         <p><i>User has not left any comments.</i></p>
