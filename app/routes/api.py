@@ -93,6 +93,7 @@ def reply():
         reply = Comment(
             parent_comment=data.get('parent_comment'),
             comment_text=data.get('comment_text'),
+            article_id=data.get('article_id'),
             author_id=session.get('user_id')
         )
 

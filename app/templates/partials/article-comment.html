@@ -2,18 +2,18 @@
     <div class="comment-wrapper">
         <img src="{{ comment.author_avatar }}" alt="author-img">
         <div class="comment-body">
-            <h2>{{ comment.author_name }}</h2>
+            <h2><a href="/profile/{{ comment.author_id }}">{{ comment.author_name }}</a></h2>
             <h5>{{ comment.created_at|format_date }}</h5>
             <p>{{ comment.comment_text }}</p>
             {% if loggedIn %}
-            {% include "partials/reply-form.html" %}
-            <button class="comment-reply-button" id="open-form">
-                Reply
-            </button>
+                {% include "partials/reply-form.html" %}
+                <button class="comment-reply-button" id="open-form">
+                    Reply
+                </button>
             {% else %}
-            <button class="comment-reply-button">
-                Login to Comment
-            </button>
+                <button class="comment-reply-button">
+                    Login to Comment
+                </button>
             {% endif %}
         </div>
     </div>

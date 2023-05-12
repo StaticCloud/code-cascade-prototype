@@ -1,6 +1,11 @@
 document.querySelector('.comment-content').addEventListener('click', async (e) => {
     e.preventDefault();
 
+    // anchor tags by default to not function properly, this is here to fix that
+    if (e.target.href) {
+        document.location = e.target.href;
+    }
+
     if (e.target.id == "open-form") {
         e.target.classList.add("none")
         e.target.parentElement.parentElement.querySelector('.comment-form').classList.remove("none")
