@@ -14,19 +14,6 @@
                     </a>
                 {% endif %}
                 <h1>{{user.username}}</h1>
-                <ul>
-                    <li>
-                        <a href="mailto:{{user.email}}" target="_blank">
-                            <img src="/icons/envelope-solid.svg" alt="email-icon">
-                        </a>
-                    </li>
-                    <li>
-                        <img src="/icons/github.svg" alt="github-icon">
-                    </li>
-                    <li>
-                        <img src="/icons/linkedin.svg" alt="linkedin-icon">
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="profile-content">
@@ -51,6 +38,27 @@
                     {% else %}
                         <p><i>User has not added a bio.</i></p>
                     {% endif %}
+                    <ul>
+                        <li>
+                            <a href="mailto:{{user.email}}" target="_blank">
+                                <img src="/icons/envelope-solid.svg" alt="email-icon">
+                            </a>
+                        </li>
+                        {% if user.github %}
+                            <li>
+                                <a href="{{ user.github }}" target="_blank">
+                                    <img src="/icons/github.svg" alt="github-icon">
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if user.linkedin %}
+                            <li>
+                                <a href="{{ user.linkedin }}" target="_blank">
+                                    <img src="/icons/linkedin.svg" alt="linkedin-icon">
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
                 </div>
                 <div class="liked-articles-section none" data-content="likes">
                     {% if user.liked_articles|length > 0 %}

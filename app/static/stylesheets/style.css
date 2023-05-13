@@ -652,16 +652,19 @@ code {
 
 .profile-user-info > img {
     border-radius: 50%;
+    width: 150px;
+    height: 150px;
 }
 
 .profile-user-info h1 {
     margin: 1rem 0;
+    font-size: 3rem;
 }
 
-.profile-user-info li img {
+.bio-section li img {
     width: 40px;
     height: 40px;
-    margin-right: 10px;
+    margin: 50px 10px 0 0;
 }
 
 .user-info {
@@ -695,7 +698,7 @@ code {
     height: 100%;
     width: 100%;
 
-    border: 5px solid var(--code);
+    border: 5px solid var(--ternary);
     transition: all 0.2s;
 }
 
@@ -767,6 +770,10 @@ code {
 .comment-body {
     margin-left: 15px;
     width: 100%;
+}
+
+.comment-body a {
+    text-decoration: none;
 }
 
 .comment-body p {
