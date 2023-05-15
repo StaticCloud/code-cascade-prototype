@@ -46,5 +46,7 @@ window.addEventListener('load', () => {
     let textarea = document.querySelector('textarea[name="comment-text"]');
     let replyTextarea = document.querySelectorAll('textarea[name="comment"]')
     replyTextarea.forEach(text => text.value = '')
-    textarea.value = '';
+    if (textarea) {
+        textarea.value = '';
+    }
 })

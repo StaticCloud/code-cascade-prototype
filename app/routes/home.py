@@ -65,7 +65,7 @@ def comment(id):
 
     try:
         comment = db.query(Comment).where(Comment.id == id).one()
-        return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'))
+        return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
     except:
         return redirect('/')
     

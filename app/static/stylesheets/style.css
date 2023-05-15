@@ -822,3 +822,16 @@ code {
 [name="comment-text"] {
     width: 100%;
 }
+
+#view-original-article {
+    display: inline-block;
+    margin: 15px 0;
+    text-decoration: none;
+
+    transition: all 0.5s;
+    border-bottom: 4px solid var(--primary);
+}
+
+#view-original-article:hover {
+    border-bottom: 4px solid white;
+}
