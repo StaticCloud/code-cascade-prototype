@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, request
 from sqlalchemy import and_, extract
-from app.models import Article
+from app.models import Article, Comment
 from app.db import get_db
 
 bp = Blueprint('home', __name__, url_prefix='/')
@@ -59,6 +59,16 @@ def article(id):
 
     return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
 
+@bp.route('/comment/<id>')
+def comment(id):
+    db = get_db()
+
+    try:
+        comment = db.query(Comment).where(Comment.id == id).one()
+        return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'))
+    except:
+        return redirect('/')
+    
 @bp.route('/login')
 def login():
     return render_template('login.html')

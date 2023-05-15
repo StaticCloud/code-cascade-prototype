@@ -1,6 +1,12 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
 <section class="section">
-    <h2>Viewing {{ comment.author_name }}'s comment for</h2>\
-    <h1>{{ comment.article_name }}</h1>
+    <h3>Viewing {{ comment.author_name }}'s comment for</h3>
+    <h2>{{ comment.article_name }}</h2>
 
     {% include "partials/article-comment.html" %}
 </section>
+
+{% endblock %}
