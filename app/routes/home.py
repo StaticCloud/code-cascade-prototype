@@ -72,15 +72,16 @@ def article(id):
 def comment(id):
     db = get_db()
 
-    try:
-        comment = db.query(Comment).where(Comment.id == id).one()
+    # try:
+    comment = db.query(Comment).where(Comment.id == id).one()
+    comment.depth = 0;
 
-        for reply in comment.replies:
-            commentDepth(reply, 1)
+    for reply in comment.replies:
+        commentDepth(reply, 1)
 
-        return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
-    except:
-        return redirect('/')
+    return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
+    # except:
+    #     return redirect('/')
     
 @bp.route('/login')
 def login():

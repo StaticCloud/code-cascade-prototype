@@ -17,7 +17,13 @@
             {% endif %}
         </div>
     </div>
-    {% for comment in comment.replies %}
-        {% include "partials/article-comment.html" %}
-    {% endfor %}
+    {% if comment.depth >= 6 %}
+        <div class="comment">
+            <a href="/comment/{{ comment.id }}" id="view-more">View the full conversation</a>
+        </div>
+    {% else %}
+        {% for comment in comment.replies %}
+            {% include "partials/article-comment.html" %}
+        {% endfor %}
+    {% endif %}
 </div>
