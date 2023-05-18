@@ -24,6 +24,7 @@ def create_app(test_config=None):
     app.register_blueprint(profile)
 
     app.jinja_env.filters['format_keywords'] = filters.format_keywords
+    app.jinja_env.filters['format_date'] = filters.format_date
 
     init_db(app)
 

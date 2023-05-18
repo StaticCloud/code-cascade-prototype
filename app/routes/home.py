@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, request
 from sqlalchemy import and_, extract
-from app.models import Article
+from app.models import Article, Comment
 from app.db import get_db
 
 bp = Blueprint('home', __name__, url_prefix='/')
@@ -40,6 +40,12 @@ def search():
     
     return render_template('search-results.html', keywords=args.get('keywords'), articles=articles, loggedIn=session.get('loggedIn'))
     
+# calculate the comment depth
+def commentDepth(comment, depth):
+    comment.depth = depth;
+    for reply in comment.replies:
+        commentDepth(reply, depth + 1)
+
 @bp.route('/article/<id>')
 def article(id):
     db = get_db()
@@ -54,9 +60,29 @@ def article(id):
     for save in article.saves:
         if save.user_id == session.get('user_id'):
             is_saved = True;
+    
+    article.replies = [reply for reply in article.replies if reply.parent_comment == None]
 
-    return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'))
+    for reply in article.replies:
+        commentDepth(reply, 0)
 
+    return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'), user_id=session.get('user_id'), avatar=session.get('avatar'))
+
+@bp.route('/comment/<id>')
+def comment(id):
+    db = get_db()
+
+    # try:
+    comment = db.query(Comment).where(Comment.id == id).one()
+    comment.depth = 0;
+
+    for reply in comment.replies:
+        commentDepth(reply, 1)
+
+    return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'), user_id=session.get('user_id'), avatar=session.get('avatar'))
+    # except:
+    #     return redirect('/')
+    
 @bp.route('/login')
 def login():
     return render_template('login.html')

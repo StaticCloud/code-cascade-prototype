@@ -1,0 +1,6 @@
+<content class="comment-content">
+    {% for comment in article.replies %}
+        {% include "partials/article-comment.html" %}
+    {% endfor %}
+</content>
+<script src="/javascript/comment-section.js"></script>
