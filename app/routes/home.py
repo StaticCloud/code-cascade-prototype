@@ -66,7 +66,7 @@ def article(id):
     for reply in article.replies:
         commentDepth(reply, 0)
 
-    return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
+    return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'), user_id=session.get('user_id'), avatar=session.get('avatar'))
 
 @bp.route('/comment/<id>')
 def comment(id):
@@ -79,7 +79,7 @@ def comment(id):
     for reply in comment.replies:
         commentDepth(reply, 1)
 
-    return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'), avatar=session.get('avatar'))
+    return render_template('comment-page.html', comment=comment, loggedIn=session.get('loggedIn'), user_id=session.get('user_id'), avatar=session.get('avatar'))
     # except:
     #     return redirect('/')
     

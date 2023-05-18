@@ -786,12 +786,18 @@ code {
     padding: 10px 0;
 }
 
-.comment-reply-button {
+.comment-button {
     border: none;
+    background: none;
+    padding: 2px 0;
 
-    background-color: var(--secondary);
-    padding: 7px 15px;
-    border-radius: 7px;
+    margin-right: 10px;
+
+    font-weight: bold;
+    font-size: 1rem;
+
+    transition: 0.3s all;
+    border-bottom: 2px solid white;
 }
 
 .comment-link {
