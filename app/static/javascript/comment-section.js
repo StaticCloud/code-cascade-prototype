@@ -33,6 +33,25 @@ document.querySelector('.comment-content').addEventListener('click', async (e) =
         }
     }
 
+    if (e.target.id == "update-button") {
+        const comment_id = e.target.closest('[data-id]').getAttribute('data-id');
+        const comment_text = e.target.parentElement.querySelector('textarea[name="edit-comment"]').value.trim();
+
+        const response = await fetch(`/api/comment/${comment_id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                comment_text
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+
+        if (response.ok) {
+            document.location.reload()
+        } else {
+            alert(response.statusText);
+        }
+    }
+
     if (e.target.id == "cancel-button") {
         e.target.parentElement.parentElement.parentElement.querySelector('#open-form').classList.remove("none")
         e.target.parentElement.parentElement.classList.add("none");
