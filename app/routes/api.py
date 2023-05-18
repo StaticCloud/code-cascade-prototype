@@ -62,6 +62,51 @@ def comments(id):
         ]
     }
 
+@bp.route('/comment', methods=['POST'])
+def comment():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        comment = Comment(
+            article_id=data.get('article_id'),
+            comment_text=data.get('comment_text'),
+            author_id=session.get('user_id')
+        )
+
+        db.add(comment)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Create comment failed'), 500
+    
+    return '', 204
+
+@bp.route('/reply', methods=['POST'])
+def reply():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        reply = Comment(
+            parent_comment=data.get('parent_comment'),
+            comment_text=data.get('comment_text'),
+            article_id=data.get('article_id'),
+            author_id=session.get('user_id')
+        )
+
+        db.add(reply)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Create reply failed'), 500
+    
+    return '', 204
+
 @bp.route('/article/<id>', methods=['GET'])
 def articles(id):
     db = get_db()
@@ -118,6 +163,8 @@ def updateUser():
         user.github = data.get('github')
         user.avatar = data.get('avatar')
 
+        session['avatar'] = user.avatar
+
         db.commit();
     except:
         print(sys.exc_info()[0])
@@ -139,7 +186,8 @@ def signup():
         user = User(
             username = data.get('username'),
             email = data.get('email'),
-            password = data.get('password')
+            password = data.get('password'),
+            avatar = '/img/avatar_8.png'
         )
 
         # add it and commit to the database
@@ -166,6 +214,7 @@ def signup():
     session['user_id'] = user.id
     session['isAdmin'] = user.isAdmin
     session['loggedIn'] = True
+    session['avatar'] = user.avatar
 
     # return the user input in JSON if the request was successful
     return {
@@ -203,6 +252,7 @@ def login():
     session['user_id'] = user.id
     session['isAdmin'] = user.isAdmin
     session['loggedIn'] = True
+    session['avatar'] = user.avatar
 
     # return the user input in JSON if the request was successful
     return {

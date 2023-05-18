@@ -1,7 +1,9 @@
 from datetime import datetime
 from app.db import Base
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, select
+from sqlalchemy.orm import relationship, column_property
+from .Article import Article
+from .User import User
 
 class Comment(Base):
     __tablename__ = 'comments'
@@ -16,5 +18,17 @@ class Comment(Base):
     author_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime, default=datetime.now)
 
-    author = relationship('User', cascade='all,delete')
     replies = relationship('Comment', remote_side=[parent_comment], cascade='all,delete')
+
+    # safer approach to getting relational data vs messy relationships
+    author_name = column_property(
+        select(User.username).where(User.id == author_id)
+    )
+
+    author_avatar = column_property(
+        select(User.avatar).where(User.id == author_id)
+    )
+
+    article_name = column_property(
+        select(Article.title).where(Article.id == article_id)
+    )
