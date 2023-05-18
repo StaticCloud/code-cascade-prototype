@@ -825,7 +825,8 @@ code {
     border-radius: 50%;
 }
 
-[name="comment-text"] {
+[name="comment-text"],
+[name="edit-comment"] {
     width: 100%;
 }
 

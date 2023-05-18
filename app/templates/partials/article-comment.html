@@ -7,6 +7,7 @@
             <p>{{ comment.comment_text }}</p>
             {% if loggedIn %}
                 {% include "partials/reply-form.html" %}
+                {% include "partials/edit-form.html" %}
                 {% if comment.author_id != user_id %}
                     <button class="comment-button" id="open-form">
                         Reply

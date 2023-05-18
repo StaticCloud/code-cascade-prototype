@@ -11,6 +11,13 @@ document.querySelector('.comment-content').addEventListener('click', async (e) =
         e.target.parentElement.parentElement.querySelector('.comment-form').classList.remove("none")
     }
 
+    if (e.target.id == "open-edit-form") {
+        e.target.classList.add("none")
+        e.target.parentElement.querySelector('p').classList.add("none")
+        e.target.parentElement.querySelector('#delete-comment').classList.add("none")
+        e.target.parentElement.parentElement.querySelector('.edit-form').classList.remove("none")
+    }
+
     if (e.target.id == "delete-comment") {
         const comment_id = e.target.closest('[data-id]').getAttribute('data-id');
 
@@ -28,6 +35,13 @@ document.querySelector('.comment-content').addEventListener('click', async (e) =
 
     if (e.target.id == "cancel-button") {
         e.target.parentElement.parentElement.parentElement.querySelector('#open-form').classList.remove("none")
+        e.target.parentElement.parentElement.classList.add("none");
+    }
+
+    if (e.target.id == "cancel-edit-button") {
+        e.target.parentElement.parentElement.parentElement.querySelector('p').classList.remove("none")
+        e.target.parentElement.parentElement.parentElement.querySelector('#open-edit-form').classList.remove("none")
+        e.target.parentElement.parentElement.parentElement.querySelector('#delete-comment').classList.remove("none")
         e.target.parentElement.parentElement.classList.add("none");
     }
 
