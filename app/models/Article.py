@@ -15,7 +15,7 @@ class Article(Base):
     article_path = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.now)
 
-    replies = relationship("Comment", cascade='all,delete', order_by='Comment.created_at')
+    replies = relationship("Comment", cascade='all,delete', order_by='Comment.created_at.desc()')
     likes = relationship("Like", cascade='all,delete', back_populates="article")
     saves = relationship("Save", cascade='all,delete', back_populates="article")
 
