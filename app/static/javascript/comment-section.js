@@ -11,6 +11,21 @@ document.querySelector('.comment-content').addEventListener('click', async (e) =
         e.target.parentElement.parentElement.querySelector('.comment-form').classList.remove("none")
     }
 
+    if (e.target.id == "delete-comment") {
+        const comment_id = e.target.closest('[data-id]').getAttribute('data-id');
+
+        const response = await fetch(`/api/comment/${comment_id}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        })
+
+        if (response.ok) {
+            document.location.reload()
+        } else {
+            alert(response.statusText);
+        }
+    }
+
     if (e.target.id == "cancel-button") {
         e.target.parentElement.parentElement.parentElement.querySelector('#open-form').classList.remove("none")
         e.target.parentElement.parentElement.classList.add("none");

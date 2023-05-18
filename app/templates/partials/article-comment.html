@@ -8,9 +8,9 @@
             {% if loggedIn %}
                 {% include "partials/reply-form.html" %}
                 {% if comment.author_id != user_id %}
-                <button class="comment-button" id="open-form">
-                    Reply
-                </button>
+                    <button class="comment-button" id="open-form">
+                        Reply
+                    </button>
                 {% endif %}
                 {% if comment.author_id == user_id %}
                     <button class="comment-button" id="open-edit-form">
