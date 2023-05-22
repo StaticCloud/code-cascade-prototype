@@ -1,0 +1,44 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
+<section class="edit-profile-wrapper">
+    <section class="input-form edit-profile-block">
+        <h2>Edit Article</h2>
+
+        <form class="profile-edit-form" action="submit">
+            <fieldset>
+                <label for="title-input">
+                    <h3>Edit Title</h3>
+                </label>
+                <input type="text" id="title-input" placeholder="Title" value="{{article.title}}">
+            </fieldset>
+            <fieldset>
+                <label for="category-input">
+                    <h3>Edit Category</h3>
+                </label>
+                <input type="text" id="category-input" placeholder="Category" value="{{article.category}}">
+            </fieldset>
+            <fieldset>
+                <label for="image-input">
+                    <h3>Edit Image</h3>
+                </label>
+                <input type="text" id="image-input" placeholder="Image Path" value="{{article.image_preview}}">
+            </fieldset>
+            <fieldset>
+                <label for="article-input">
+                    <h3>Edit Article Path</h3>
+                </label>
+                <input type="text" id="article-input" placeholder="Article Path" value="{{article.article_path}}">
+            </fieldset>
+            <button type="submit">
+                Save Article
+            </button>
+            <button type="submit">
+                Delete Article
+            </button>
+        </form>
+    </section>
+</section>
+
+{% endblock %}

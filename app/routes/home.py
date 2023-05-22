@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, session, redirect, request
 from sqlalchemy import and_, extract
 from app.models import Article
 from app.db import get_db
+from app.utils.admin import admin_required
 
 bp = Blueprint('home', __name__, url_prefix='/')
 
@@ -56,6 +57,14 @@ def article(id):
             is_saved = True;
 
     return render_template('article.html', article=article, is_liked=is_liked, is_saved=is_saved, loggedIn=session.get('loggedIn'), isAdmin=session.get('isAdmin'))
+
+@bp.route('/editArticle/<id>')
+@admin_required
+def editArticle(id):
+    db = get_db()
+    article = db.query(Article).filter(Article.id == id).one();
+
+    return render_template('edit-article.html', loggedIn=session.get('loggedIn'), article=article)
 
 @bp.route('/login')
 def login():
