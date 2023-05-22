@@ -789,7 +789,7 @@ code {
 .comment-button {
     border: none;
     background: none;
-    padding: 2px 0;
+    padding: 4px 0;
 
     margin-right: 10px;
 
@@ -825,7 +825,8 @@ code {
     border-radius: 50%;
 }
 
-[name="comment-text"] {
+[name="comment-text"],
+[name="edit-comment"] {
     width: 100%;
 }
 
