@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify, session
 from sqlalchemy import and_, extract
 from app.models import Comment, Article, User, Like, Save
 from app.utils.auth import login_required
+from app.utils.admin import admin_required
 from app.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -78,6 +79,7 @@ def articles(id):
         }
 
 @bp.route('/article', methods=['POST'])
+@admin_required
 def addArticle():
     data = request.get_json()
     db = get_db()
@@ -103,6 +105,24 @@ def addArticle():
             'title': article.title,
             'category': article.category
     }
+
+@bp.route('/article/<id>', methods=['DELETE'])
+@admin_required
+def removeArticle(id):
+    db = get_db()
+
+    try:
+        article = db.query(Article).filter(Article.id == id).one();
+
+        db.delete(article)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Delete article failed'), 500
+    
+    return '', 200
 
 @bp.route('/editProfile', methods=['PUT'])
 @login_required

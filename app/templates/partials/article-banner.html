@@ -3,6 +3,9 @@
     <div class="article-banner-text">
         <h3 class="category" data-category="{{article.category}}">{{article.category}}</h3>
         <h1>{{article.title}}</h1>
+        {% if isAdmin %}
+        <a href="/editArticle/{{article.id}}">Edit Article</a>
+        {% endif %}
         {% if loggedIn %}
             <div class="like-or-save">
                 <span>
