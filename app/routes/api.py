@@ -62,6 +62,40 @@ def comments(id):
         ]
     }
 
+@bp.route('/comment/<id>', methods=['DELETE'])
+def deleteComment(id):
+    db = get_db();
+    comment = db.query(Comment).filter(Comment.id == id).one()
+
+    try:
+        db.delete(comment)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Comment not found'), 404
+    
+    return '', 204
+
+@bp.route('/comment/<id>', methods=['PUT'])
+def editComment(id):
+    data = request.get_json()
+    db = get_db();
+
+    try:
+        comment = db.query(Comment).filter(Comment.id == id).one()
+        comment.comment_text = data.get('comment_text')
+
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Comment not found'), 404
+    
+    return '', 204
+
 @bp.route('/comment', methods=['POST'])
 def comment():
     data = request.get_json()
