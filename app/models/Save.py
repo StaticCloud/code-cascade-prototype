@@ -8,4 +8,4 @@ class Save(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     article_id = Column(Integer, ForeignKey('articles.id'))
 
-    article = relationship('Article', back_populates="saves")
+    article = relationship('Article', back_populates="saves", cascade='all,delete')

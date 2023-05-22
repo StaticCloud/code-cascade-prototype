@@ -8,4 +8,4 @@ class Like(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     article_id = Column(Integer, ForeignKey('articles.id'))
 
-    article = relationship('Article', back_populates="likes")
+    article = relationship('Article', back_populates="likes", cascade='all,delete')
