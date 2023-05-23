@@ -7,6 +7,6 @@ def admin_required(func):
     def wrapped_function(*args, **kwargs):
         if session.get('loggedIn') == True and session.get('isAdmin') == True:
             return func(*args, **kwargs)
-        return redirect('/home')
+        return redirect('/')
     
     return wrapped_function

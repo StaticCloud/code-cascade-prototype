@@ -203,6 +203,29 @@ def removeArticle(id):
     
     return '', 200
 
+@bp.route('/article/<id>', methods=['PUT'])
+@admin_required
+def editArticle(id):
+    db = get_db()
+    data = request.get_json()
+
+    try:
+        article = db.query(Article).filter(Article.id == id).one();
+
+        article.title = data.get('title')
+        article.category = data.get('category')
+        article.image_preview = data.get('image_preview')
+        article.article_path = data.get('article_path')
+
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Edit article failed'), 500
+    
+    return '', 200
+
 @bp.route('/editProfile', methods=['PUT'])
 @login_required
 def updateUser():
