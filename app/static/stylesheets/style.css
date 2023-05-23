@@ -459,6 +459,10 @@ main a[href="/search"] h2 {
     animation-duration: 0.5s;
 }
 
+.article-banner-text > a > img {
+    width: 22px;
+}
+
 .article-banner-text h1 {
     margin: 1rem 0; 
 }
