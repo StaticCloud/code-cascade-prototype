@@ -15,6 +15,15 @@
                 {% include "partials/article-preview.html" %}
             {% endfor %}
         </div>
+        {% if isAdmin == true %}
+            <a href="/newArticle" class="recent-article-button">
+                Create a new article
+            </a>
+        {% endif %}
+        <a href="/search" class="recent-article-button">
+            Search for articles
+            <img src="/svg/magnifying-glass-solid.svg" alt="search">
+        </a>
     </div>
 </section>
 <section id="about-wrapper">

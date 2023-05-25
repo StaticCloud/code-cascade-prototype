@@ -12,8 +12,8 @@ def index():
     # obtain only the first five
     db = get_db()
     articles = db.query(Article).order_by(Article.created_at.desc()).all()
-    articles = articles[:5]
-    return render_template('home.html', articles=articles, loggedIn=session.get('loggedIn'))
+    articles = articles[:6]
+    return render_template('home.html', articles=articles, loggedIn=session.get('loggedIn'), isAdmin=session.get('isAdmin'))
 
 @bp.route('/search')
 def search():
@@ -76,6 +76,12 @@ def editArticle(id):
     article = db.query(Article).filter(Article.id == id).one();
 
     return render_template('edit-article.html', loggedIn=session.get('loggedIn'), article=article)
+
+@bp.route('/newArticle')
+@admin_required
+def addArticle():
+    return render_template('new-article.html', loggedIn=session.get('loggedIn'))
+
 
 @bp.route('/comment/<id>')
 def comment(id):

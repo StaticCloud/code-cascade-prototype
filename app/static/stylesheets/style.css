@@ -137,6 +137,29 @@ textarea {
     background-color: var(--primary);
 }
 
+.recent-article-button {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bold;
+
+    padding: 1rem;
+    margin-top: 1rem;
+
+    text-align: center;
+
+    background-color: var(--secondary);
+}
+
+.recent-article-button > img {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+}
+
 /* LANDING SECTION */
 #landing-wrapper {
     height: 100vh;

@@ -169,6 +169,7 @@ def addArticle():
             category = data.get('category'),
             image_preview = data.get('image_preview'),
             article_path = data.get('article_path'),
+            description = data.get('description')
         )
 
         db.add(article)
