@@ -17,9 +17,9 @@ class User(Base):
     linkedin = Column(String(50), nullable=False, default="")
     github = Column(String(50), nullable=False, default="")
 
-    liked_articles = relationship("Like")
-    saved_articles = relationship("Save")
-    comments = relationship("Comment")
+    liked_articles = relationship("Like", order_by='Like.created_at.desc()')
+    saved_articles = relationship("Save", order_by='Save.created_at.desc()')
+    comments = relationship("Comment", order_by='Comment.created_at.desc()')
 
     @validates('email')
     def validate_email(self, key, email):
