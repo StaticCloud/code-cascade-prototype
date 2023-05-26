@@ -1,0 +1,13 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
+<section class="comment-content">
+    <h3>Viewing {{ comment.author_name }}'s comment for</h3>
+    <h2><a href="/article/{{ comment.article_id }}" id="view-original-article">{{ comment.article_name }}</a></h2>
+
+    {% include "partials/article-comment.html" %}
+</section>
+<script src="/javascript/comment-section.js"></script>
+
+{% endblock %}

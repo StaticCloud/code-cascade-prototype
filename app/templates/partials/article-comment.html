@@ -1,0 +1,39 @@
+<div class="comment" data-id="{{ comment.id }}">
+    <div class="comment-wrapper">
+        <img src="{{ comment.author_avatar }}" alt="author-img">
+        <div class="comment-body">
+            <h2><a href="/profile/{{ comment.author_id }}">{{ comment.author_name }}</a></h2>
+            <h5>{{ comment.created_at|format_date }}</h5>
+            <p>{{ comment.comment_text }}</p>
+            {% if loggedIn %}
+                {% include "partials/reply-form.html" %}
+                {% if comment.author_id != user_id %}
+                <button class="comment-button" id="open-form">
+                    Reply
+                </button>
+                {% endif %}
+                {% if comment.author_id == user_id %}
+                    <button class="comment-button" id="open-edit-form">
+                        Edit
+                    </button>
+                    <button class="comment-button" id="delete-comment">
+                        Delete
+                    </button>
+                {% endif %}
+            {% else %}
+                <button class="comment-reply-button">
+                    Login to Comment
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    {% if comment.depth >= 6 %}
+        <div class="comment">
+            <a href="/comment/{{ comment.id }}" id="view-more">View the full conversation</a>
+        </div>
+    {% else %}
+        {% for comment in comment.replies %}
+            {% include "partials/article-comment.html" %}
+        {% endfor %}
+    {% endif %}
+</div>

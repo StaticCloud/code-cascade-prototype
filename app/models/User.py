@@ -19,6 +19,7 @@ class User(Base):
 
     liked_articles = relationship("Like")
     saved_articles = relationship("Save")
+    comments = relationship("Comment")
 
     @validates('email')
     def validate_email(self, key, email):
