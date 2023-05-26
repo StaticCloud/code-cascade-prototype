@@ -7,12 +7,13 @@
             <p>{{ comment.comment_text }}</p>
             {% if loggedIn %}
                 {% include "partials/reply-form.html" %}
+                {% include "partials/edit-form.html" %}
                 {% if comment.author_id != user_id %}
-                <button class="comment-button" id="open-form">
-                    Reply
-                </button>
+                    <button class="comment-button" id="open-form">
+                        Reply
+                    </button>
                 {% endif %}
-                {% if comment.author_id == user_id %}
+                {% if comment.author_id == user_id or isAdmin == true %}
                     <button class="comment-button" id="open-edit-form">
                         Edit
                     </button>
@@ -21,8 +22,8 @@
                     </button>
                 {% endif %}
             {% else %}
-                <button class="comment-reply-button">
-                    Login to Comment
+                <button class="comment-button">
+                    <a href="/login">Login to Comment</a>
                 </button>
             {% endif %}
         </div>

@@ -6,24 +6,33 @@ const signup = async (e) => {
     const email = document.querySelector('input[name="email"]').value.trim();
     const password = document.querySelector('input[name="password"]').value.trim();
 
-    if (username && email && password) {
-        // make a request to posting the new user to the database
-        const response = await fetch('/api/signup', {
-            method: 'POST',
-            body: JSON.stringify({
-                username,
-                email,
-                password
-            }),
-            headers: { 'Content-Type': 'application/json' }
-        })
+    const confirmPassword = document.querySelector('input[name="confirm-password"]').value.trim();
 
-        // redirect to home if the user was successfully created and authenticated
-        if (response.ok) {
-            document.location.replace('/')
+    if (username && email && password && confirmPassword) {
+
+        if (confirmPassword === password) {
+            // make a request to posting the new user to the database
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username,
+                    email,
+                    password
+                }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+
+            // redirect to home if the user was successfully created and authenticated
+            if (response.ok) {
+                document.location.replace('/')
+            } else {
+                alert(response.statusText);
+            }
         } else {
-            alert(response.statusText);
+            alert("Passwords must match.");
         }
+    } else {
+        alert("Please enter a value for the missing fields.");
     }
     
 }

@@ -1,0 +1,48 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
+<section class="edit-profile-wrapper">
+    <section class="input-form edit-profile-block">
+        <h2>Add Article</h2>
+
+        <form class="profile-edit-form" action="submit">
+            <fieldset>
+                <label for="title-input">
+                    <h3>Title</h3>
+                </label>
+                <input type="text" id="title-input" placeholder="Title">
+            </fieldset>
+            <fieldset>
+                <label for="category-input">
+                    <h3>Category</h3>
+                </label>
+                <input type="text" id="category-input" placeholder="Category">
+            </fieldset>
+            <fieldset>
+                <label for="image-input">
+                    <h3>Image</h3>
+                </label>
+                <input type="text" id="image-input" placeholder="Image Path">
+            </fieldset>
+            <fieldset>
+                <label for="article-input">
+                    <h3>Article Path</h3>
+                </label>
+                <input type="text" id="article-input" placeholder="Article Path">
+            </fieldset>
+            <fieldset>
+                <label for="description-input">
+                    <h3>Description</h3>
+                </label>
+                <input type="text" id="description-input" placeholder="Description">
+            </fieldset>
+            <button type="click" id="add-article">
+                Create Article
+            </button>
+        </form>
+    </section>
+</section>
+<script src="/javascript/add-article.js"></script>
+
+{% endblock %}

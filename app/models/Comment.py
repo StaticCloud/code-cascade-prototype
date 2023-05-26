@@ -18,7 +18,7 @@ class Comment(Base):
     author_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime, default=datetime.now)
 
-    replies = relationship('Comment', remote_side=[parent_comment], cascade='all,delete')
+    replies = relationship('Comment', remote_side=[parent_comment], cascade='all,delete', order_by='Comment.created_at.desc()')
 
     # safer approach to getting relational data vs messy relationships
     author_name = column_property(

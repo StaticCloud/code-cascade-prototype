@@ -137,6 +137,29 @@ textarea {
     background-color: var(--primary);
 }
 
+.recent-article-button {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bold;
+
+    padding: 1rem;
+    margin-top: 1rem;
+
+    text-align: center;
+
+    background-color: var(--secondary);
+}
+
+.recent-article-button > img {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+}
+
 /* LANDING SECTION */
 #landing-wrapper {
     height: 100vh;
@@ -457,6 +480,10 @@ main a[href="/search"] h2 {
     text-align: center;
     animation-name: fade-in;
     animation-duration: 0.5s;
+}
+
+.article-banner-text > a > img {
+    width: 22px;
 }
 
 .article-banner-text h1 {
@@ -789,7 +816,7 @@ code {
 .comment-button {
     border: none;
     background: none;
-    padding: 2px 0;
+    padding: 4px 0;
 
     margin-right: 10px;
 
@@ -825,16 +852,26 @@ code {
     border-radius: 50%;
 }
 
-[name="comment-text"] {
+[name="comment-text"],
+[name="edit-comment"] {
     width: 100%;
 }
 
 #view-original-article {
     display: inline-block;
     margin: 15px 0;
+    padding: 1rem;
+    width: 100%;
+    background-color: var(--secondary);
     text-decoration: none;
 
-    border-bottom: 4px solid white;
+    transition: all 0.2s;
+
+    border-bottom: 2px solid var(--secondary);
+}
+
+#view-original-article:hover {
+    border-bottom: 2px solid white;
 }
 
 #view-more {

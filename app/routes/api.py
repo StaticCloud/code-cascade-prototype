@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify, session
 from sqlalchemy import and_, extract
 from app.models import Comment, Article, User, Like, Save
 from app.utils.auth import login_required
+from app.utils.admin import admin_required
 from app.db import get_db
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -61,6 +62,40 @@ def comments(id):
             for comment in comments # iterate through all top level comments
         ]
     }
+
+@bp.route('/comment/<id>', methods=['DELETE'])
+def deleteComment(id):
+    db = get_db();
+    comment = db.query(Comment).filter(Comment.id == id).one()
+
+    try:
+        db.delete(comment)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Comment not found'), 404
+    
+    return '', 204
+
+@bp.route('/comment/<id>', methods=['PUT'])
+def editComment(id):
+    data = request.get_json()
+    db = get_db();
+
+    try:
+        comment = db.query(Comment).filter(Comment.id == id).one()
+        comment.comment_text = data.get('comment_text')
+
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Comment not found'), 404
+    
+    return '', 204
 
 @bp.route('/comment', methods=['POST'])
 def comment():
@@ -123,6 +158,7 @@ def articles(id):
         }
 
 @bp.route('/article', methods=['POST'])
+@admin_required
 def addArticle():
     data = request.get_json()
     db = get_db()
@@ -133,6 +169,7 @@ def addArticle():
             category = data.get('category'),
             image_preview = data.get('image_preview'),
             article_path = data.get('article_path'),
+            description = data.get('description')
         )
 
         db.add(article)
@@ -148,6 +185,47 @@ def addArticle():
             'title': article.title,
             'category': article.category
     }
+
+@bp.route('/article/<id>', methods=['DELETE'])
+@admin_required
+def removeArticle(id):
+    db = get_db()
+
+    try:
+        article = db.query(Article).filter(Article.id == id).one();
+
+        db.delete(article)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Delete article failed'), 500
+    
+    return '', 200
+
+@bp.route('/article/<id>', methods=['PUT'])
+@admin_required
+def editArticle(id):
+    db = get_db()
+    data = request.get_json()
+
+    try:
+        article = db.query(Article).filter(Article.id == id).one();
+
+        article.title = data.get('title')
+        article.category = data.get('category')
+        article.image_preview = data.get('image_preview')
+        article.article_path = data.get('article_path')
+
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message = 'Edit article failed'), 500
+    
+    return '', 200
 
 @bp.route('/editProfile', methods=['PUT'])
 @login_required

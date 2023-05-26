@@ -22,6 +22,8 @@ const login = async (e) => {
         } else {
             alert(response.statusText);
         }
+    } else {
+        alert("Please enter a value for the missing fields.");
     }
     
 }
